@@ -1,0 +1,270 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/dashboard/dashboard.css">
+<link rel="stylesheet" href="/css/dashboard/orders.css">
+</head>
+<body>
+  <div class="dash-wrapper">
+    <%- include('partials/sidebar', { activePage: 'orders', user: user, stats: stats }) %>
+    
+    <main class="dash-main">
+      <%- include('partials/topbar', { pageTitle: 'Orders', notifications: notifications, website: website }) %>
+      
+      <div class="dash-content">
+        <!-- Page Header -->
+        <div class="orders-page-header">
+          <h2>Orders Management</h2>
+          <div class="orders-header-actions">
+            <div class="orders-search-container">
+              <i data-lucide="search" class="search-icon"></i>
+              <input type="text" id="ordersSearch" placeholder="Search orders, customers..." autocomplete="off">
+              <span class="search-shortcut">⌘K</span>
+            </div>
+            <button class="dash-btn dash-btn-primary" onclick="exportOrders()">
+              <i data-lucide="download"></i>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="orders-stats-bar">
+          <div class="orders-stat-card">
+            <div class="orders-stat-icon pending">
+              <i data-lucide="clock"></i>
+            </div>
+            <div class="orders-stat-content">
+              <div class="orders-stat-value"><%= orderStats.pending %></div>
+              <div class="orders-stat-label">Pending</div>
+            </div>
+          </div>
+          <div class="orders-stat-card">
+            <div class="orders-stat-icon processing">
+              <i data-lucide="loader"></i>
+            </div>
+            <div class="orders-stat-content">
+              <div class="orders-stat-value"><%= orderStats.processing %></div>
+              <div class="orders-stat-label">Processing</div>
+            </div>
+          </div>
+          <div class="orders-stat-card">
+            <div class="orders-stat-icon shipped">
+              <i data-lucide="truck"></i>
+            </div>
+            <div class="orders-stat-content">
+              <div class="orders-stat-value"><%= orderStats.shipped %></div>
+              <div class="orders-stat-label">Shipped</div>
+            </div>
+          </div>
+          <div class="orders-stat-card">
+            <div class="orders-stat-icon delivered">
+              <i data-lucide="check-circle"></i>
+            </div>
+            <div class="orders-stat-content">
+              <div class="orders-stat-value"><%= orderStats.delivered %></div>
+              <div class="orders-stat-label">Delivered</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="orders-filters">
+          <div class="filter-group">
+            <span class="filter-label">Status:</span>
+            <select id="filterStatus" class="filter-select">
+              <option value="">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div class="filter-divider"></div>
+          <div class="filter-group">
+            <span class="filter-label">Date:</span>
+            <select id="filterDate" class="filter-select">
+              <option value="">All Time</option>
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+            </select>
+          </div>
+          <div class="filter-divider"></div>
+          <div class="filter-group">
+            <span class="filter-label">Sort:</span>
+            <select id="filterSort" class="filter-select">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="amount-high">Amount: High to Low</option>
+              <option value="amount-low">Amount: Low to High</option>
+            </select>
+          </div>
+          <div class="filters-spacer"></div>
+          <button class="filter-clear-btn" onclick="clearFilters()">
+            <i data-lucide="x"></i>
+            Clear
+          </button>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="orders-table-card">
+          <div class="orders-table-header">
+            <h3>
+              All Orders 
+              <span class="orders-count"><%= orders.length %></span>
+            </h3>
+            <div class="orders-table-actions">
+              <button title="Refresh" onclick="refreshOrders()">
+                <i data-lucide="refresh-cw"></i>
+                Refresh
+              </button>
+            </div>
+          </div>
+          
+          <% if (orders.length === 0) { %>
+          <div class="orders-empty">
+            <div class="orders-empty-icon">
+              <i data-lucide="package"></i>
+            </div>
+            <h3>No Orders Yet</h3>
+            <p>Orders will appear here once customers start purchasing from your store.</p>
+          </div>
+          <% } else { %>
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <% orders.forEach(function(order) { %>
+              <tr data-order-id="<%= order.id %>" data-status="<%= order.status %>">
+                <td class="order-id-cell">
+                  <a href="/dashboard/orders/<%= order.id %>">#<%= order.id %></a>
+                </td>
+                <td class="customer-cell">
+                  <div class="customer-name"><%= order.customer %></div>
+                  <div class="customer-email"><%= order.email %></div>
+                </td>
+                <td class="date-cell">
+                  <div class="date-main"><%= order.date %></div>
+                  <div class="date-time"><%= order.time || '09:30 AM' %></div>
+                </td>
+                <td class="items-cell">
+                  <span class="items-count"><%= order.items || 1 %> item<%= (order.items || 1) > 1 ? 's' : '' %></span>
+                </td>
+                <td class="amount-cell">$<%= order.amount.toLocaleString() %></td>
+                <td>
+                  <span class="status-badge <%= order.status %>">
+                    <i data-lucide="<%= order.status === 'delivered' ? 'check-circle' : order.status === 'shipped' ? 'truck' : order.status === 'processing' ? 'loader' : order.status === 'cancelled' ? 'x-circle' : 'clock' %>"></i>
+                    <%= order.status.charAt(0).toUpperCase() + order.status.slice(1) %>
+                  </span>
+                </td>
+                <td class="actions-cell">
+                  <a href="/dashboard/orders/<%= order.id %>" class="action-btn" title="View Details">
+                    <i data-lucide="eye"></i>
+                  </a>
+                  <button class="action-btn" title="Update Status" onclick="updateOrderStatus('<%= order.id %>')">
+                    <i data-lucide="edit-2"></i>
+                  </button>
+                  <button class="action-btn" title="Print Invoice" onclick="printInvoice('<%= order.id %>')">
+                    <i data-lucide="printer"></i>
+                  </button>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+
+          <!-- Pagination -->
+          <div class="orders-pagination">
+            <div class="pagination-info">
+              Showing 1-<%= Math.min(orders.length, 10) %> of <%= orders.length %> orders
+            </div>
+            <div class="pagination-controls">
+              <button class="pagination-btn" disabled>
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <button class="pagination-btn active">1</button>
+              <% if (orders.length > 10) { %>
+              <button class="pagination-btn">2</button>
+              <% } %>
+              <% if (orders.length > 20) { %>
+              <button class="pagination-btn">3</button>
+              <% } %>
+              <button class="pagination-btn" <%= orders.length <= 10 ? 'disabled' : '' %>>
+                <i data-lucide="chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <% } %>
+        </div>
+
+<%- include('partials/footer') %>
+
+<script>
+  // Search functionality
+  const searchInput = document.getElementById('ordersSearch');
+  const tableBody = document.getElementById('ordersTableBody');
+  
+  if (searchInput && tableBody) {
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const rows = tableBody.querySelectorAll('tr');
+      
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(searchTerm) ? '' : 'none';
+      });
+    });
+  }
+
+  // Filter functionality
+  const filterStatus = document.getElementById('filterStatus');
+  if (filterStatus && tableBody) {
+    filterStatus.addEventListener('change', function() {
+      const status = this.value;
+      const rows = tableBody.querySelectorAll('tr');
+      
+      rows.forEach(row => {
+        if (!status || row.dataset.status === status) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  function clearFilters() {
+    document.getElementById('filterStatus').value = '';
+    document.getElementById('filterDate').value = '';
+    document.getElementById('filterSort').value = 'newest';
+    document.getElementById('ordersSearch').value = '';
+    
+    const rows = tableBody.querySelectorAll('tr');
+    rows.forEach(row => row.style.display = '');
+  }
+
+  function refreshOrders() {
+    location.reload();
+  }
+
+  function exportOrders() {
+    alert('Export functionality will be implemented with backend integration');
+  }
+
+  function updateOrderStatus(orderId) {
+    alert('Update status for order ' + orderId);
+  }
+
+  function printInvoice(orderId) {
+    alert('Print invoice for order ' + orderId);
+  }
+</script>

@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "templates": "Templates",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign In",
+    "getStarted": "Get Started Free"
+  },
+  "hero": {
+    "badge": "Build Your Professional Website in Minutes",
+    "headline1": "CREATE YOUR AUTOMOTIVE",
+    "headline2": "PARTS WEBSITE INSTANTLY",
+    "description": "Build professional automotive parts websites instantly with drag-and-drop simplicity. Premium templates, easy customization, your domain.",
+    "cta": "Start Building Free",
+    "watchDemo": "Watch Demo"
+  },
+  "features": {
+    "title": "Everything You Need",
+    "subtitle": "Powerful Tools for Your Success",
+    "description": "Build, customize, and launch your professional automotive parts website with our comprehensive suite of tools.",
+    "dragDrop": {
+      "title": "Drag & Drop Builder",
+      "description": "Create beautiful pages without coding. Simply drag elements and customize them to match your brand."
+    },
+    "templates": {
+      "title": "Premium Templates",
+      "description": "Start with professionally designed templates crafted specifically for automotive parts businesses."
+    },
+    "domains": {
+      "title": "Custom Domains",
+      "description": "Use your own domain or get a professional subdomain from our platform instantly."
+    },
+    "ecommerce": {
+      "title": "E-Commerce Ready",
+      "description": "Built-in shopping cart, payment processing, and inventory management for your parts business."
+    },
+    "seo": {
+      "title": "SEO Optimized",
+      "description": "Rank higher on search engines with our built-in SEO tools and optimized code structure."
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Get help whenever you need it with our dedicated customer support team."
+    }
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Launch in 3 Simple Steps",
+    "step1": {
+      "title": "Choose a Template",
+      "description": "Browse our collection of stunning templates designed for automotive parts businesses."
+    },
+    "step2": {
+      "title": "Customize Everything",
+      "description": "Use our drag-and-drop editor to personalize colors, content, and layout."
+    },
+    "step3": {
+      "title": "Publish & Grow",
+      "description": "Connect your domain and launch your professional website to the world."
+    }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the perfect plan for your business",
+    "starter": {
+      "name": "Starter",
+      "price": "Free",
+      "description": "Perfect for getting started",
+      "features": ["1 Website", "Basic Templates", "PartKon Subdomain", "Community Support"]
+    },
+    "professional": {
+      "name": "Professional",
+      "price": "$29/mo",
+      "description": "For growing businesses",
+      "features": ["5 Websites", "Premium Templates", "Custom Domain", "Priority Support", "E-Commerce Features", "Analytics Dashboard"]
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "description": "For large organizations",
+      "features": ["Unlimited Websites", "Custom Templates", "Multiple Domains", "Dedicated Support", "API Access", "White Label Option"]
+    }
+  },
+  "testimonials": {
+    "title": "Trusted by Thousands",
+    "subtitle": "See what our customers say"
+  },
+  "cta": {
+    "title": "Ready to Build Your Website?",
+    "subtitle": "Join thousands of automotive businesses already using PartKon",
+    "button": "Get Started Free"
+  },
+  "footer": {
+    "description": "The easiest way for automotive parts suppliers and customers to create professional websites.",
+    "product": "Product",
+    "company": "Company",
+    "support": "Support",
+    "legal": "Legal",
+    "copyright": "© 2026 PartKon. All rights reserved."
+  }
+}

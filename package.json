@@ -1,0 +1,32 @@
+{
+  "name": "partkon",
+  "version": "1.0.0",
+  "description": "PartKon - SaaS Website Builder Platform for Automotive Parts Suppliers & Customers",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "express",
+    "ejs",
+    "saas",
+    "website-builder",
+    "drag-drop",
+    "automotive",
+    "parts"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "i18next": "^25.7.3",
+    "i18next-fs-backend": "^2.6.1",
+    "i18next-http-middleware": "^3.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

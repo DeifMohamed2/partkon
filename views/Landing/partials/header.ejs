@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="<%= currentLang %>" dir="<%= dir %>">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#6366F1">
+  <meta name="description" content="PartKon - The easiest way to build professional automotive parts websites with drag-and-drop simplicity.">
+  <title><%= typeof title !== 'undefined' ? title : 'PartKon - Build Your Automotive Parts Website' %></title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <!-- Preload critical animations -->
+  <style>
+    /* Critical animation styles for above-the-fold content */
+    body {
+      opacity: 0;
+    }
+    body.page-loaded {
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Page loading animation script (runs immediately) -->
+  <script>
+    // Add page-loaded class after a brief delay for smooth entrance
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.body.classList.add('page-loaded');
+      }, 100);
+    });
+  </script>

@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "features": "Características",
+    "templates": "Plantillas",
+    "pricing": "Precios",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "signIn": "Iniciar Sesión",
+    "getStarted": "Empezar Gratis"
+  },
+  "hero": {
+    "badge": "Crea tu sitio web profesional en minutos",
+    "headline1": "CREA TU SITIO WEB",
+    "headline2": "DE AUTOPARTES INSTANTÁNEAMENTE",
+    "description": "PartKon permite a los proveedores de autopartes y clientes crear sitios web profesionales con nuestro constructor de arrastrar y soltar intuitivo.",
+    "cta": "Empezar Gratis",
+    "watchDemo": "Ver Demo"
+  }
+}

@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - PartKon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        /* Floating Shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: floatShape 25s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(6, 182, 212, 0.08));
+            bottom: -80px;
+            left: -80px;
+            animation-delay: -8s;
+        }
+
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(168, 85, 247, 0.08));
+            top: 40%;
+            left: 10%;
+            animation-delay: -16s;
+        }
+
+        .shape-4 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(59, 130, 246, 0.08));
+            top: 20%;
+            right: 15%;
+            animation-delay: -12s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(30px, -40px) rotate(5deg) scale(1.05); }
+            50% { transform: translate(-20px, 30px) rotate(-5deg) scale(0.95); }
+            75% { transform: translate(-40px, -20px) rotate(3deg) scale(1.02); }
+        }
+
+        /* Animated Lines */
+        .bg-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .line {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.1), transparent);
+            animation: linePulse 8s ease-in-out infinite;
+        }
+
+        .line:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .line:nth-child(2) { left: 25%; animation-delay: -2s; }
+        .line:nth-child(3) { left: 40%; animation-delay: -4s; }
+        .line:nth-child(4) { left: 60%; animation-delay: -1s; }
+        .line:nth-child(5) { left: 75%; animation-delay: -3s; }
+        .line:nth-child(6) { left: 90%; animation-delay: -5s; }
+
+        @keyframes linePulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 0.6; transform: scaleY(1.1); }
+        }
+
+        /* Floating Dots */
+        .dots-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(99, 102, 241, 0.3);
+            border-radius: 50%;
+            animation: dotFloat 20s linear infinite;
+        }
+
+        @keyframes dotFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Navbar - Pure Glass Effect */
+        .navbar-wrapper {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: auto;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(80px) saturate(180%);
+            -webkit-backdrop-filter: blur(80px) saturate(180%);
+            border-radius: 100px;
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 
+                0 8px 32px rgba(255, 255, 255, 0.1),
+                0 4px 16px rgba(0, 0, 0, 0.05),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 8px 16px 8px 8px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-logo:hover {
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .nav-logo-icon {
+          color:#ffff;
+            width: 38px;
+            height: 38px;
+            background: rgba(99, 102, 241, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 4px 12px rgba(99, 102, 241, 0.25),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-logo-icon i {
+            width: 20px;
+            height: 20px;
+            color: white;
+        }
+
+        .nav-logo-text {
+            font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e293b;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .logo-highlight {
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 0 4px;
+        }
+
+        .nav-link {
+            color: #374151;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-link:hover {
+            color: #111827;
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: rgba(99, 102, 241, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 
+                0 4px 16px rgba(99, 102, 241, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.25);
+        }
+
+        .nav-btn:hover {
+            background: rgba(99, 102, 241, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 28px rgba(99, 102, 241, 0.35),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Card */
+        .register-card {
+            width: 100%;
+            max-width: 580px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(32px) saturate(180%);
+            -webkit-backdrop-filter: blur(32px) saturate(180%);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            padding: 40px 44px;
+            box-shadow: 
+                0 32px 64px -16px rgba(0, 0, 0, 0.08),
+                0 16px 32px -8px rgba(0, 0, 0, 0.04),
+                0 0 0 1px rgba(255, 255, 255, 0.9),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+            animation: cardSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 25%;
+            background: linear-gradient(90deg, #6366F1, #8B5CF6);
+            border-radius: 4px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        /* Steps Container */
+        .steps-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .steps-container {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step {
+            min-width: 100%;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+
+        .step.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        /* Step Header */
+        .step-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .step-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .step-icon i {
+            width: 28px;
+            height: 28px;
+            color: #6366F1;
+        }
+
+        .step-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .step-header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* Role Selection Cards */
+        .role-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .role-card {
+            cursor: pointer;
+        }
+
+        .role-card input {
+            display: none;
+        }
+
+        .role-content {
+            padding: 20px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .role-card:hover .role-content {
+            border-color: #c7d2fe;
+            background: #fafafe;
+            transform: translateY(-2px);
+        }
+
+        .role-card input:checked + .role-content {
+            border-color: #6366F1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+        }
+
+        .role-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.08));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            transition: all 0.3s;
+        }
+
+        .role-card input:checked + .role-content .role-icon {
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .role-icon i,
+        .role-icon svg {
+            width: 24px;
+            height: 24px;
+            color: #6366F1;
+            stroke: #6366F1;
+            transition: all 0.3s;
+        }
+
+        .role-card input:checked + .role-content .role-icon i,
+        .role-card input:checked + .role-content .role-icon svg {
+            color: white !important;
+            stroke: white !important;
+        }
+
+        .role-title {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .role-desc {
+            display: block;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* Team Size Cards */
+        .team-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .team-card {
+            cursor: pointer;
+            flex: 1;
+            min-width: calc(33.333% - 10px);
+            max-width: calc(33.333% - 10px);
+        }
+
+        .team-card input {
+            display: none;
+        }
+
+        .team-content {
+            padding: 24px 16px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .team-card:hover .team-content {
+            border-color: #c7d2fe;
+            transform: translateY(-2px);
+        }
+
+        .team-card input:checked + .team-content {
+            border-color: #6366F1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+        }
+
+        .team-number {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            color: #6366F1;
+            margin-bottom: 4px;
+        }
+
+        .team-label {
+            display: block;
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Source Cards */
+        .source-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .source-card {
+            cursor: pointer;
+        }
+
+        .source-card input {
+            display: none;
+        }
+
+        .source-content {
+            padding: 18px 20px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .source-card:hover .source-content {
+            border-color: #c7d2fe;
+            transform: translateY(-2px);
+        }
+
+        .source-card input:checked + .source-content {
+            border-color: #6366F1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+        }
+
+        .source-content i {
+            width: 22px;
+            height: 22px;
+            color: #6366F1;
+        }
+
+        .source-content span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* Step Navigation */
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .nav-btn-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: transparent;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn-back:hover {
+            border-color: #cbd5e1;
+            color: #374151;
+            background: #f8fafc;
+        }
+
+        .nav-btn-back i {
+            width: 18px;
+            height: 18px;
+        }
+
+        .nav-btn-next {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+            margin-left: auto;
+        }
+
+        .nav-btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+        }
+
+        .nav-btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .nav-btn-next i {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Sign in link */
+        .signin-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .signin-link a {
+            color: #6366F1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signin-link a:hover {
+            color: #4F46E5;
+        }
+
+        @keyframes cardSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Header */
+        .register-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .register-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .register-header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .register-header a {
+            color: #6366F1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .register-header a:hover {
+            color: #4F46E5;
+        }
+
+        /* Social Buttons */
+        .social-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .social-btn:hover {
+            border-color: #c7d2fe;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12);
+        }
+
+        .social-btn:hover::before {
+            opacity: 1;
+        }
+
+        .social-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .social-btn i {
+            width: 18px;
+            height: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider span {
+            color: #94a3b8;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        /* Form */
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 0.2px;
+        }
+
+        .form-group label .required {
+            color: #EF4444;
+            font-size: 12px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: #94a3b8;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 50px 16px 52px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            color: #1e293b;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-group input:hover {
+            border-color: #c7d2fe;
+            background: #fefefe;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: #fff;
+            border-color: #6366F1;
+            box-shadow: 
+                0 0 0 4px rgba(99, 102, 241, 0.12),
+                0 4px 16px rgba(99, 102, 241, 0.1);
+        }
+
+        .input-wrapper:focus-within .input-icon {
+            color: #6366F1;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #94a3b8;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border-radius: 8px;
+            z-index: 3;
+        }
+
+        .password-toggle:hover {
+            color: #6366F1;
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .password-toggle i {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Password Strength */
+        .password-strength {
+            margin-top: 10px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .strength-fill.weak { width: 33%; background: #EF4444; }
+        .strength-fill.medium { width: 66%; background: #F59E0B; }
+        .strength-fill.strong { width: 100%; background: #10B981; }
+
+        .strength-text {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .strength-text.weak { color: #EF4444; }
+        .strength-text.medium { color: #F59E0B; }
+        .strength-text.strong { color: #10B981; }
+
+        /* Terms */
+        .terms-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .custom-checkbox {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark {
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            border-color: transparent;
+        }
+
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .custom-checkbox input:checked ~ .checkmark::after {
+            display: block;
+        }
+
+        .terms-text {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .terms-text a {
+            color: #6366F1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .terms-text a:hover {
+            color: #4F46E5;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%);
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            margin-top: 12px;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+            background-position: 100% 100%;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover::after {
+            opacity: 1;
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+        }
+
+        /* Security Badge */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #f1f5f9;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .security-badge i {
+            width: 16px;
+            height: 16px;
+            color: #10B981;
+        }
+
+        /* Responsive */
+        @media (max-width: 620px) {
+            .navbar-wrapper {
+                left: 20px;
+                right: 20px;
+                transform: none;
+                width: auto;
+            }
+
+            .navbar {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-logo-text {
+                display: none;
+            }
+
+            .nav-divider {
+                display: none;
+            }
+
+            .register-card {
+                padding: 28px 20px;
+                border-radius: 20px;
+                max-width: 100%;
+            }
+
+            .step-header h1 {
+                font-size: 22px;
+            }
+
+            .step-icon {
+                width: 52px;
+                height: 52px;
+            }
+
+            .role-options {
+                grid-template-columns: 1fr;
+            }
+
+            .team-card {
+                min-width: calc(50% - 6px);
+                max-width: calc(50% - 6px);
+            }
+
+            .source-options {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .step-navigation {
+                flex-direction: column-reverse;
+                gap: 12px;
+            }
+
+            .nav-btn-back,
+            .nav-btn-next {
+                width: 100%;
+                justify-content: center;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+    
+    <div class="bg-lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <div class="dots-container" id="dotsContainer"></div>
+
+    <!-- Navbar - Centered Glass Effect -->
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <i data-lucide="layers"></i>
+                </div>
+                <span class="nav-logo-text">Part<span class="logo-highlight">Kon</span></span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/" class="nav-btn">Sign In</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="register-card">
+            <!-- Progress Bar (subtle) -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">Step 1 of 4</span>
+            </div>
+
+            <!-- Steps Container -->
+            <div class="steps-wrapper">
+                <div class="steps-container" id="stepsContainer">
+                    
+                    <!-- Step 1: Role Selection -->
+                    <div class="step active" data-step="1">
+                        <div class="step-header">
+                            <div class="step-icon">
+                                <i data-lucide="user-circle"></i>
+                            </div>
+                            <h1>What's your role?</h1>
+                            <p>Help us personalize your experience</p>
+                        </div>
+                        <div class="role-options">
+                            <label class="role-card">
+                                <input type="radio" name="role" value="business_owner" required>
+                                <div class="role-content">
+                                    <div class="role-icon"><i data-lucide="briefcase"></i></div>
+                                    <span class="role-title">Business Owner</span>
+                                    <span class="role-desc">I run my own company</span>
+                                </div>
+                            </label>
+                            <label class="role-card">
+                                <input type="radio" name="role" value="manager">
+                                <div class="role-content">
+                                    <div class="role-icon"><i data-lucide="users"></i></div>
+                                    <span class="role-title">Team Manager</span>
+                                    <span class="role-desc">I manage a team</span>
+                                </div>
+                            </label>
+                            <label class="role-card">
+                                <input type="radio" name="role" value="freelancer">
+                                <div class="role-content">
+                                    <div class="role-icon"><i data-lucide="laptop"></i></div>
+                                    <span class="role-title">Freelancer</span>
+                                    <span class="role-desc">I work independently</span>
+                                </div>
+                            </label>
+                            <label class="role-card">
+                                <input type="radio" name="role" value="developer">
+                                <div class="role-content">
+                                    <div class="role-icon"><i data-lucide="code"></i></div>
+                                    <span class="role-title">Developer</span>
+                                    <span class="role-desc">I build software</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Team Size -->
+                    <div class="step" data-step="2">
+                        <div class="step-header">
+                            <div class="step-icon">
+                                <i data-lucide="users-2"></i>
+                            </div>
+                            <h1>How big is your team?</h1>
+                            <p>This helps us recommend the right plan</p>
+                        </div>
+                        <div class="team-options">
+                            <label class="team-card">
+                                <input type="radio" name="teamSize" value="just_me" required>
+                                <div class="team-content">
+                                    <span class="team-number">1</span>
+                                    <span class="team-label">Just me</span>
+                                </div>
+                            </label>
+                            <label class="team-card">
+                                <input type="radio" name="teamSize" value="small">
+                                <div class="team-content">
+                                    <span class="team-number">2-10</span>
+                                    <span class="team-label">Small team</span>
+                                </div>
+                            </label>
+                            <label class="team-card">
+                                <input type="radio" name="teamSize" value="medium">
+                                <div class="team-content">
+                                    <span class="team-number">11-50</span>
+                                    <span class="team-label">Growing team</span>
+                                </div>
+                            </label>
+                            <label class="team-card">
+                                <input type="radio" name="teamSize" value="large">
+                                <div class="team-content">
+                                    <span class="team-number">51-200</span>
+                                    <span class="team-label">Large team</span>
+                                </div>
+                            </label>
+                            <label class="team-card">
+                                <input type="radio" name="teamSize" value="enterprise">
+                                <div class="team-content">
+                                    <span class="team-number">200+</span>
+                                    <span class="team-label">Enterprise</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: How did you hear about us -->
+                    <div class="step" data-step="3">
+                        <div class="step-header">
+                            <div class="step-icon">
+                                <i data-lucide="megaphone"></i>
+                            </div>
+                            <h1>How did you find us?</h1>
+                            <p>We'd love to know how you discovered PartKon</p>
+                        </div>
+                        <div class="source-options">
+                            <label class="source-card">
+                                <input type="radio" name="source" value="google" required>
+                                <div class="source-content">
+                                    <i data-lucide="search"></i>
+                                    <span>Google Search</span>
+                                </div>
+                            </label>
+                            <label class="source-card">
+                                <input type="radio" name="source" value="social">
+                                <div class="source-content">
+                                    <i data-lucide="share-2"></i>
+                                    <span>Social Media</span>
+                                </div>
+                            </label>
+                            <label class="source-card">
+                                <input type="radio" name="source" value="friend">
+                                <div class="source-content">
+                                    <i data-lucide="heart-handshake"></i>
+                                    <span>Friend or Colleague</span>
+                                </div>
+                            </label>
+                            <label class="source-card">
+                                <input type="radio" name="source" value="youtube">
+                                <div class="source-content">
+                                    <i data-lucide="youtube"></i>
+                                    <span>YouTube</span>
+                                </div>
+                            </label>
+                            <label class="source-card">
+                                <input type="radio" name="source" value="blog">
+                                <div class="source-content">
+                                    <i data-lucide="file-text"></i>
+                                    <span>Blog or Article</span>
+                                </div>
+                            </label>
+                            <label class="source-card">
+                                <input type="radio" name="source" value="other">
+                                <div class="source-content">
+                                    <i data-lucide="more-horizontal"></i>
+                                    <span>Other</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Account Details -->
+                    <div class="step" data-step="4">
+                        <div class="step-header">
+                            <div class="step-icon">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+                            <h1>Create your account</h1>
+                            <p>Just a few more details to get started</p>
+                        </div>
+                        <form class="register-form" id="registerForm" action="/register" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <div class="input-wrapper">
+                                        <i data-lucide="user" class="input-icon"></i>
+                                        <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <div class="input-wrapper">
+                                        <i data-lucide="user" class="input-icon"></i>
+                                        <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <div class="input-wrapper">
+                                    <i data-lucide="mail" class="input-icon"></i>
+                                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="input-wrapper">
+                                    <i data-lucide="lock" class="input-icon"></i>
+                                    <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                        <i data-lucide="eye" id="password-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength">
+                                    <div class="strength-bar">
+                                        <div class="strength-fill" id="strength-fill"></div>
+                                    </div>
+                                    <span class="strength-text" id="strength-text">Enter a password</span>
+                                </div>
+                            </div>
+
+                            <div class="terms-group">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="terms" required>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span class="terms-text">
+                                    I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="step-navigation">
+                <button type="button" class="nav-btn-back" id="backBtn" onclick="prevStep()" style="visibility: hidden;">
+                    <i data-lucide="arrow-left"></i>
+                    Back
+                </button>
+                <button type="button" class="nav-btn-next" id="nextBtn" onclick="nextStep()">
+                    Continue
+                    <i data-lucide="arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Sign in link -->
+            <div class="signin-link">
+                Already have an account? <a href="/">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Create floating dots
+        const dotsContainer = document.getElementById('dotsContainer');
+        for (let i = 0; i < 20; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dot.style.left = Math.random() * 100 + '%';
+            dot.style.animationDuration = (15 + Math.random() * 20) + 's';
+            dot.style.animationDelay = -(Math.random() * 20) + 's';
+            dot.style.opacity = 0.2 + Math.random() * 0.3;
+            dotsContainer.appendChild(dot);
+        }
+
+        // Multi-step form logic
+        let currentStep = 1;
+        const totalSteps = 4;
+        const stepsContainer = document.getElementById('stepsContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const backBtn = document.getElementById('backBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateStep() {
+            // Update container position with slide animation
+            const offset = (currentStep - 1) * -100;
+            stepsContainer.style.transform = `translateX(${offset}%)`;
+
+            // Update active step
+            document.querySelectorAll('.step').forEach((step, index) => {
+                if (index + 1 === currentStep) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+
+            // Update progress
+            const progress = (currentStep / totalSteps) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `Step ${currentStep} of ${totalSteps}`;
+
+            // Update buttons
+            backBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+            
+            if (currentStep === totalSteps) {
+                nextBtn.innerHTML = 'Create Account <i data-lucide="check"></i>';
+            } else {
+                nextBtn.innerHTML = 'Continue <i data-lucide="arrow-right"></i>';
+            }
+            lucide.createIcons();
+        }
+
+        function validateStep(step) {
+            if (step === 1) {
+                return document.querySelector('input[name="role"]:checked') !== null;
+            } else if (step === 2) {
+                return document.querySelector('input[name="teamSize"]:checked') !== null;
+            } else if (step === 3) {
+                return document.querySelector('input[name="source"]:checked') !== null;
+            } else if (step === 4) {
+                const form = document.getElementById('registerForm');
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const terms = document.querySelector('input[name="terms"]').checked;
+                return firstName && lastName && email && password.length >= 6 && terms;
+            }
+            return true;
+        }
+
+        function nextStep() {
+            if (!validateStep(currentStep)) {
+                // Shake animation for validation feedback
+                const currentStepEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+                currentStepEl.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    currentStepEl.style.animation = '';
+                }, 500);
+                return;
+            }
+
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateStep();
+            } else {
+                // Submit the form
+                submitForm();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStep();
+            }
+        }
+
+        function submitForm() {
+            const form = document.getElementById('registerForm');
+            
+            // Add hidden inputs for previous step data
+            const role = document.querySelector('input[name="role"]:checked')?.value;
+            const teamSize = document.querySelector('input[name="teamSize"]:checked')?.value;
+            const source = document.querySelector('input[name="source"]:checked')?.value;
+
+            if (role) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'role';
+                input.value = role;
+                form.appendChild(input);
+            }
+
+            if (teamSize) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'teamSize';
+                input.value = teamSize;
+                form.appendChild(input);
+            }
+
+            if (source) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'source';
+                input.value = source;
+                form.appendChild(input);
+            }
+
+            form.submit();
+        }
+
+        // Add click handlers for radio buttons to auto-advance (optional nice UX)
+        document.querySelectorAll('.role-card input, .team-card input, .source-card input').forEach(input => {
+            input.addEventListener('change', function() {
+                // Small delay for visual feedback
+                setTimeout(() => {
+                    lucide.createIcons();
+                }, 100);
+            });
+        });
+
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(inputId + '-eye');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.setAttribute('data-lucide', 'eye-off');
+            } else {
+                input.type = 'password';
+                eyeIcon.setAttribute('data-lucide', 'eye');
+            }
+            lucide.createIcons();
+        }
+
+        // Password strength checker
+        const passwordInput = document.getElementById('password');
+        const strengthFill = document.getElementById('strength-fill');
+        const strengthText = document.getElementById('strength-text');
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+
+            strengthFill.className = 'strength-fill';
+            strengthText.className = 'strength-text';
+
+            if (password.length === 0) {
+                strengthText.textContent = 'Enter a password';
+            } else if (strength <= 1) {
+                strengthFill.classList.add('weak');
+                strengthText.classList.add('weak');
+                strengthText.textContent = 'Weak password';
+            } else if (strength <= 2) {
+                strengthFill.classList.add('medium');
+                strengthText.classList.add('medium');
+                strengthText.textContent = 'Medium strength';
+            } else {
+                strengthFill.classList.add('strong');
+                strengthText.classList.add('strong');
+                strengthText.textContent = 'Strong password';
+            }
+        });
+
+        // Add shake animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                20% { transform: translateX(-10px); }
+                40% { transform: translateX(10px); }
+                60% { transform: translateX(-10px); }
+                80% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        updateStep();
+    </script>
+</body>
+</html>

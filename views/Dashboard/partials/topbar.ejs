@@ -1,0 +1,101 @@
+<!-- Dashboard Topbar -->
+<header class="dash-topbar" id="dashTopbar">
+  <!-- Mobile Menu Toggle -->
+  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+    <i data-lucide="menu"></i>
+  </button>
+
+  <div class="topbar-left">
+    <h1 class="topbar-title"><%= typeof pageTitle !== 'undefined' ? pageTitle : 'Dashboard' %></h1>
+    <div class="topbar-breadcrumb">
+      <span>Dashboard</span>
+      <i data-lucide="chevron-right"></i>
+      <span><%= typeof pageTitle !== 'undefined' ? pageTitle : 'Overview' %></span>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <!-- Search Bar -->
+    <div class="topbar-search">
+      <i data-lucide="search" class="search-icon"></i>
+      <input type="text" id="globalSearchInput" placeholder="Search orders, products..." autocomplete="off">
+      <span class="topbar-search-shortcut">⌘K</span>
+    </div>
+
+    <!-- Notifications -->
+    <div class="topbar-dropdown-wrapper" id="notificationsWrapper">
+      <button class="topbar-icon-btn" id="notificationsBtn">
+        <i data-lucide="bell"></i>
+        <% if (typeof notifications !== 'undefined' && notifications.filter(n => !n.read).length > 0) { %>
+        <span class="topbar-badge"><%= notifications.filter(n => !n.read).length %></span>
+        <% } %>
+      </button>
+      <div class="topbar-dropdown" id="notificationsDropdown">
+        <div class="topbar-dropdown-header">
+          <span class="topbar-dropdown-title">Notifications</span>
+          <button class="topbar-dropdown-action">Mark all read</button>
+        </div>
+        <div class="topbar-dropdown-list">
+          <% if (typeof notifications !== 'undefined' && notifications.length > 0) { %>
+            <% notifications.slice(0, 5).forEach(function(notif) { %>
+            <div class="topbar-dropdown-item <%= !notif.read ? 'unread' : '' %>">
+              <div class="dropdown-item-icon <%= notif.type %>">
+                <i data-lucide="<%= notif.type === 'success' ? 'check-circle' : notif.type === 'warning' ? 'alert-triangle' : 'info' %>"></i>
+              </div>
+              <div class="dropdown-item-content">
+                <div class="dropdown-item-text"><%= notif.message %></div>
+                <div class="dropdown-item-time"><%= notif.time %></div>
+              </div>
+            </div>
+            <% }); %>
+          <% } else { %>
+            <div class="topbar-dropdown-item">
+              <div class="dropdown-item-content">
+                <div class="dropdown-item-text">No notifications</div>
+              </div>
+            </div>
+          <% } %>
+        </div>
+        <a href="/dashboard/notifications" class="topbar-dropdown-footer">View all notifications</a>
+      </div>
+    </div>
+
+    <!-- Visit Website -->
+    <a href="<%= typeof website !== 'undefined' && website.url ? website.url : '#' %>" target="_blank" class="topbar-icon-btn" title="Visit Website">
+      <i data-lucide="external-link"></i>
+    </a>
+
+    <!-- Help -->
+    <button class="topbar-icon-btn" title="Help">
+      <i data-lucide="help-circle"></i>
+    </button>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Notifications dropdown
+    const notifWrapper = document.getElementById('notificationsWrapper');
+    const notifBtn = document.getElementById('notificationsBtn');
+    
+    if (notifBtn && notifWrapper) {
+      notifBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        notifWrapper.classList.toggle('active');
+      });
+      
+      document.addEventListener('click', function() {
+        notifWrapper.classList.remove('active');
+      });
+    }
+    
+    // Search shortcut
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('globalSearchInput');
+        if (searchInput) searchInput.focus();
+      }
+    });
+  });
+</script>

@@ -1,0 +1,844 @@
+<!-- ====================================
+     LOGIN MODAL - PROFESSIONAL DESIGN
+     ==================================== -->
+<div class="login-modal-overlay" id="loginModal">
+  <div class="login-modal">
+    <!-- Close Button -->
+    <button class="modal-close-btn" id="closeLoginModal" aria-label="Close login modal">
+      <i data-lucide="x"></i>
+    </button>
+
+    <!-- Modal Content -->
+    <div class="modal-content">
+      <!-- Left Side - Branding -->
+      <div class="modal-branding">
+        <div class="branding-content">
+          <div class="branding-logo">
+            <div class="branding-logo-icon">
+              <i data-lucide="layers"></i>
+            </div>
+            <span class="branding-logo-text">Part<span class="branding-logo-highlight">Kon</span></span>
+          </div>
+          <h2 class="branding-headline">Welcome Back!</h2>
+          <p class="branding-text">Sign in to access your dashboard, manage your websites, and continue building amazing automotive parts stores.</p>
+          
+          <!-- Features List -->
+          <div class="branding-features">
+            <div class="branding-feature">
+              <div class="feature-check">
+                <i data-lucide="check"></i>
+              </div>
+              <span>Access your dashboard</span>
+            </div>
+            <div class="branding-feature">
+              <div class="feature-check">
+                <i data-lucide="check"></i>
+              </div>
+              <span>Manage your websites</span>
+            </div>
+            <div class="branding-feature">
+              <div class="feature-check">
+                <i data-lucide="check"></i>
+              </div>
+              <span>View analytics & reports</span>
+            </div>
+          </div>
+
+          <!-- Decorative Elements -->
+          <div class="branding-decoration">
+            <div class="decoration-circle decoration-circle-1"></div>
+            <div class="decoration-circle decoration-circle-2"></div>
+            <div class="decoration-circle decoration-circle-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side - Login Form -->
+      <div class="modal-form-section">
+        <div class="form-header">
+          <h3 class="form-title">Sign In</h3>
+          <p class="form-subtitle">Enter your credentials to continue</p>
+        </div>
+
+        <!-- Login Form -->
+        <form class="login-form" id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail" class="form-label">Email Address</label>
+            <div class="input-wrapper">
+              <i data-lucide="mail" class="input-icon"></i>
+              <input 
+                type="email" 
+                id="loginEmail" 
+                name="email" 
+                class="form-input" 
+                placeholder="name@company.com"
+                required
+                autocomplete="email"
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="loginPassword" class="form-label">Password</label>
+              <a href="#" class="forgot-password-link">Forgot password?</a>
+            </div>
+            <div class="input-wrapper">
+              <i data-lucide="lock" class="input-icon"></i>
+              <input 
+                type="password" 
+                id="loginPassword" 
+                name="password" 
+                class="form-input" 
+                placeholder="••••••••"
+                required
+                autocomplete="current-password"
+              >
+              <button type="button" class="password-toggle" id="toggleLoginPassword" aria-label="Toggle password visibility">
+                <i data-lucide="eye" class="eye-open"></i>
+                <i data-lucide="eye-off" class="eye-closed"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="remember" class="checkbox-input">
+              <span class="checkbox-custom"></span>
+              <span class="checkbox-text">Remember me for 30 days</span>
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <span>Sign In</span>
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </form>
+
+        <!-- Register Link -->
+        <div class="form-footer">
+          <p>Don't have an account? <a href="/register" class="register-link">Create account</a></p>
+        </div>
+
+        <!-- Security Badge -->
+        <div class="security-badge">
+          <i data-lucide="shield-check"></i>
+          <span>Protected by enterprise-grade security</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ====================================
+   LOGIN MODAL STYLES
+   ==================================== */
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.login-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.login-modal {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  max-width: 960px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.login-modal-overlay.active .login-modal {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: rotate(90deg);
+}
+
+.modal-close-btn i {
+  width: 20px;
+  height: 20px;
+  color: #64748B;
+}
+
+/* Modal Content Layout */
+.modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 580px;
+}
+
+/* Left Side - Branding */
+.modal-branding {
+  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%);
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.branding-content {
+  position: relative;
+  z-index: 2;
+}
+
+.branding-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.branding-logo-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.branding-logo-icon i {
+  width: 26px;
+  height: 26px;
+  color: #fff;
+}
+
+.branding-logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.branding-logo-highlight {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.branding-headline {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.branding-text {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.branding-features {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.branding-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.feature-check {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-check i {
+  width: 14px;
+  height: 14px;
+  color: #fff;
+}
+
+.branding-feature span {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+/* Decorative Elements */
+.branding-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.decoration-circle-1 {
+  width: 200px;
+  height: 200px;
+  top: -60px;
+  right: -60px;
+}
+
+.decoration-circle-2 {
+  width: 120px;
+  height: 120px;
+  bottom: 40px;
+  left: -40px;
+}
+
+.decoration-circle-3 {
+  width: 80px;
+  height: 80px;
+  bottom: -20px;
+  right: 60px;
+}
+
+/* Right Side - Form */
+.modal-form-section {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
+}
+
+.form-header {
+  margin-bottom: 28px;
+}
+
+.form-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  font-size: 15px;
+  color: #64748B;
+}
+
+/* Social Login Buttons */
+.social-login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1E293B;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.google-btn svg,
+.github-btn svg {
+  flex-shrink: 0;
+}
+
+/* Form Divider */
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-divider::before,
+.form-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #E2E8F0;
+}
+
+.form-divider span {
+  font-size: 13px;
+  color: #94A3B8;
+  white-space: nowrap;
+}
+
+/* Login Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.forgot-password-link {
+  font-size: 13px;
+  color: #6366F1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #4F46E5;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  width: 20px;
+  height: 20px;
+  color: #94A3B8;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #1E293B;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: #94A3B8;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6366F1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.form-input:focus + .input-icon,
+.input-wrapper:focus-within .input-icon {
+  color: #6366F1;
+}
+
+/* Password Toggle */
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle i {
+  width: 20px;
+  height: 20px;
+  color: #94A3B8;
+  transition: color 0.3s ease;
+}
+
+.password-toggle:hover i {
+  color: #6366F1;
+}
+
+.password-toggle .eye-closed {
+  display: none;
+}
+
+.password-toggle.active .eye-open {
+  display: none;
+}
+
+.password-toggle.active .eye-closed {
+  display: block;
+}
+
+/* Checkbox */
+.checkbox-group {
+  margin-top: 4px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+.checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #E2E8F0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.checkbox-custom::after {
+  content: '';
+  width: 10px;
+  height: 6px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  transform: rotate(-45deg) scale(0);
+  transition: transform 0.2s ease;
+  position: absolute;
+  top: 4px;
+}
+
+.checkbox-input:checked + .checkbox-custom {
+  background: #6366F1;
+  border-color: #6366F1;
+}
+
+.checkbox-input:checked + .checkbox-custom::after {
+  transform: rotate(-45deg) scale(1);
+}
+
+.checkbox-text {
+  font-size: 14px;
+  color: #64748B;
+}
+
+/* Submit Button */
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.35);
+}
+
+.submit-btn i {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover i {
+  transform: translateX(4px);
+}
+
+/* Form Footer */
+.form-footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #E2E8F0;
+}
+
+.form-footer p {
+  font-size: 14px;
+  color: #64748B;
+}
+
+.register-link {
+  color: #6366F1;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #4F46E5;
+}
+
+/* Security Badge */
+.security-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 12px;
+  background: #F8FAFC;
+  border-radius: 10px;
+}
+
+.security-badge i {
+  width: 16px;
+  height: 16px;
+  color: #10B981;
+}
+
+.security-badge span {
+  font-size: 12px;
+  color: #64748B;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .modal-content {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .modal-branding {
+    display: none;
+  }
+
+  .login-modal {
+    max-width: 480px;
+  }
+
+  .modal-form-section {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-modal-overlay {
+    padding: 16px;
+  }
+
+  .login-modal {
+    border-radius: 20px;
+  }
+
+  .modal-form-section {
+    padding: 32px 24px;
+  }
+
+  .form-title {
+    font-size: 22px;
+  }
+
+  .social-login-buttons {
+    gap: 10px;
+  }
+
+  .social-btn {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .form-input {
+    padding: 12px 14px 12px 44px;
+    font-size: 14px;
+  }
+
+  .submit-btn {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const loginModal = document.getElementById('loginModal');
+  const closeBtn = document.getElementById('closeLoginModal');
+  const signInBtn = document.getElementById('sign-in-btn');
+  const togglePasswordBtn = document.getElementById('toggleLoginPassword');
+  const passwordInput = document.getElementById('loginPassword');
+  const loginForm = document.getElementById('loginForm');
+
+  // Open modal
+  if (signInBtn) {
+    signInBtn.addEventListener('click', function() {
+      loginModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // Re-initialize Lucide icons for the modal
+      if (typeof lucide !== 'undefined') {
+        setTimeout(() => lucide.createIcons(), 100);
+      }
+    });
+  }
+
+  // Close modal
+  function closeModal() {
+    loginModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  // Close on overlay click
+  loginModal.addEventListener('click', function(e) {
+    if (e.target === loginModal) {
+      closeModal();
+    }
+  });
+
+  // Close on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && loginModal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Toggle password visibility
+  if (togglePasswordBtn && passwordInput) {
+    togglePasswordBtn.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      this.classList.toggle('active');
+    });
+  }
+
+  // Form submission
+  if (loginForm) {
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const submitBtn = loginForm.querySelector('.submit-btn');
+      
+      // Disable button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Signing in...</span><i data-lucide="loader-2" class="animate-spin"></i>';
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+      
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          // Redirect to dashboard on success
+          window.location.href = data.redirect || '/dashboard';
+        } else {
+          // Show error message
+          alert(data.message || 'Invalid email or password. Try demo@partkon.com / demo123');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Sign In</span><i data-lucide="arrow-right"></i>';
+          if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+          }
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('An error occurred. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Sign In</span><i data-lucide="arrow-right"></i>';
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+      }
+    });
+  }
+});
+</script>

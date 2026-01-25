@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "features": "Fonctionnalités",
+    "templates": "Modèles",
+    "pricing": "Tarifs",
+    "about": "À propos",
+    "contact": "Contact",
+    "signIn": "Connexion",
+    "getStarted": "Commencer Gratuitement"
+  },
+  "hero": {
+    "badge": "Créez votre site professionnel en quelques minutes",
+    "headline1": "CRÉEZ VOTRE SITE",
+    "headline2": "DE PIÈCES AUTO INSTANTANÉMENT",
+    "description": "PartKon permet aux fournisseurs de pièces automobiles et aux clients de créer des sites web professionnels grâce à notre constructeur glisser-déposer intuitif.",
+    "cta": "Commencer Gratuitement",
+    "watchDemo": "Voir la Démo"
+  }
+}
