@@ -1,0 +1,350 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/customer/website-builder.css">
+</head>
+
+<body class="builder-body">
+  <div class="builder-layout">
+    
+    <!-- Left Sidebar -->
+    <aside class="builder-sidebar-left" id="sidebarLeft">
+      <div class="sidebar-header">
+        <a href="/dashboard" class="sidebar-back">
+          <i data-lucide="arrow-left"></i>
+        </a>
+        <div class="sidebar-logo">
+          <i data-lucide="car"></i>
+          <span>PartKon Builder</span>
+        </div>
+      </div>
+
+      <div class="sidebar-tabs">
+        <button class="sidebar-tab active" data-tab="pages">
+          <i data-lucide="file-text"></i>
+          Pages
+        </button>
+        <button class="sidebar-tab" data-tab="sections">
+          <i data-lucide="layers"></i>
+          Sections
+        </button>
+        <button class="sidebar-tab" data-tab="theme">
+          <i data-lucide="palette"></i>
+          Theme
+        </button>
+        <button class="sidebar-tab" data-tab="code">
+          <i data-lucide="code-2"></i>
+          Code
+        </button>
+      </div>
+
+      <!-- Pages Panel -->
+      <div class="sidebar-panel active" id="pagesPanel">
+        <div class="panel-header">
+          <span>Site Pages</span>
+          <button class="panel-add-btn" id="addPageBtn">
+            <i data-lucide="plus"></i>
+          </button>
+        </div>
+        <div class="pages-list" id="pagesList"></div>
+      </div>
+
+      <!-- Sections Panel -->
+      <div class="sidebar-panel" id="sectionsPanel">
+        <div class="panel-header">
+          <span>Page Sections</span>
+          <button class="panel-add-btn" id="addSectionBtn">
+            <i data-lucide="plus"></i>
+          </button>
+        </div>
+        <div class="sections-list" id="sectionsList"></div>
+      </div>
+
+      <!-- Theme Panel -->
+      <div class="sidebar-panel" id="themePanel">
+        <div class="panel-header">
+          <span>Theme Settings</span>
+        </div>
+        <div class="theme-settings">
+          <div class="theme-group">
+            <label class="theme-label"><i data-lucide="type"></i> Brand Name</label>
+            <input type="text" id="brandNameInput" class="theme-input" value="PARTSFORM">
+          </div>
+          <div class="theme-group">
+            <label class="theme-label"><i data-lucide="droplet"></i> Colors</label>
+            <div class="color-inputs">
+              <div class="color-input-row">
+                <span>Primary</span>
+                <input type="color" id="primaryColor" value="#3b82f6">
+              </div>
+              <div class="color-input-row">
+                <span>Secondary</span>
+                <input type="color" id="secondaryColor" value="#10b981">
+              </div>
+              <div class="color-input-row">
+                <span>Accent</span>
+                <input type="color" id="accentColor" value="#f59e0b">
+              </div>
+            </div>
+          </div>
+          <div class="theme-group">
+            <label class="theme-label"><i data-lucide="a-large-small"></i> Fonts</label>
+            <select id="headingFont" class="theme-select">
+              <option value="Inter">Inter</option>
+              <option value="Poppins">Poppins</option>
+              <option value="Montserrat">Montserrat</option>
+            </select>
+          </div>
+          <div class="theme-group">
+            <label class="theme-label"><i data-lucide="square"></i> Button Style</label>
+            <div class="button-style-options">
+              <button class="style-option active" data-style="rounded">Rounded</button>
+              <button class="style-option" data-style="pill">Pill</button>
+              <button class="style-option" data-style="square">Square</button>
+            </div>
+          </div>
+          <button class="apply-theme-btn" id="applyThemeBtn">
+            <i data-lucide="refresh-cw"></i>
+            Apply Theme Changes
+          </button>
+        </div>
+      </div>
+
+      <!-- Code Panel -->
+      <div class="sidebar-panel" id="codePanel">
+        <div class="panel-header">
+          <span>Custom Code</span>
+        </div>
+        <div class="code-panel-content">
+          <div class="code-tabs">
+            <button class="code-tab active" data-code-tab="html">HTML</button>
+            <button class="code-tab" data-code-tab="css">CSS</button>
+          </div>
+          <div class="code-editor-wrap active" id="htmlCodeWrap">
+            <textarea id="customHtmlCode" class="code-textarea" placeholder="<div class='custom'>...</div>"></textarea>
+          </div>
+          <div class="code-editor-wrap" id="cssCodeWrap">
+            <textarea id="customCssCode" class="code-textarea" placeholder=".custom { ... }"></textarea>
+          </div>
+          <button class="code-apply-btn" id="addCustomSection">
+            <i data-lucide="plus"></i>
+            Add as New Section
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-footer-builder">
+        <button class="sidebar-footer-btn" id="previewSiteBtn">
+          <i data-lucide="external-link"></i>
+          Preview in New Tab
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Canvas -->
+    <main class="builder-canvas">
+      <div class="canvas-toolbar">
+        <div class="toolbar-left">
+          <div class="current-page-indicator">
+            <i data-lucide="file-text"></i>
+            <span id="currentPageName">Home</span>
+          </div>
+        </div>
+        
+        <div class="toolbar-center">
+          <div class="device-switcher">
+            <button class="device-btn active" data-device="desktop"><i data-lucide="monitor"></i></button>
+            <button class="device-btn" data-device="tablet"><i data-lucide="tablet"></i></button>
+            <button class="device-btn" data-device="mobile"><i data-lucide="smartphone"></i></button>
+          </div>
+          <div class="zoom-control">
+            <button class="zoom-btn" id="zoomOut"><i data-lucide="minus"></i></button>
+            <span class="zoom-value" id="zoomValue">100%</span>
+            <button class="zoom-btn" id="zoomIn"><i data-lucide="plus"></i></button>
+          </div>
+        </div>
+        
+        <div class="toolbar-right">
+          <button class="toolbar-btn" id="undoBtn"><i data-lucide="undo-2"></i></button>
+          <button class="toolbar-btn" id="redoBtn"><i data-lucide="redo-2"></i></button>
+          <div class="toolbar-divider"></div>
+          <button class="toolbar-btn secondary" id="exportBtn">
+            <i data-lucide="download"></i>
+            Export
+          </button>
+          <button class="toolbar-btn primary" id="publishBtn">
+            <i data-lucide="rocket"></i>
+            Publish
+          </button>
+        </div>
+      </div>
+
+      <div class="canvas-frame-wrapper" id="canvasWrapper">
+        <div class="canvas-frame" id="canvasFrame">
+          <div class="preview-container" id="previewContainer"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar - Editor -->
+    <aside class="builder-sidebar-right" id="sidebarRight">
+      <div class="editor-panel" id="editorPanel">
+        <!-- No Selection -->
+        <div class="no-selection" id="noSelection">
+          <div class="no-selection-icon"><i data-lucide="mouse-pointer-click"></i></div>
+          <h4>Select an Element</h4>
+          <p>Click any element in the preview to edit it. Drag sections to reorder them.</p>
+        </div>
+
+        <!-- Element Editor -->
+        <div class="element-editor" id="elementEditor" style="display: none;">
+          <div class="editor-header">
+            <span id="editorTitle">Edit Element</span>
+            <button class="editor-close" id="closeEditor"><i data-lucide="x"></i></button>
+          </div>
+          
+          <div class="editor-content">
+            <div class="editor-section">
+              <label class="editor-label">Text Content</label>
+              <textarea id="textContentInput" rows="4"></textarea>
+            </div>
+            
+            <div class="editor-section" id="linkSection" style="display: none;">
+              <label class="editor-label">Link URL</label>
+              <input type="text" id="linkUrlInput" placeholder="https://">
+            </div>
+            
+            <div class="editor-section" id="imageSection" style="display: none;">
+              <label class="editor-label">Image URL</label>
+              <input type="text" id="imageUrlInput" placeholder="https://...">
+            </div>
+            
+            <div class="editor-section">
+              <label class="editor-label">Styles</label>
+              <div class="style-row">
+                <span>Font Size</span>
+                <select id="fontSizeSelect">
+                  <option value="">Default</option>
+                  <option value="12px">12px</option>
+                  <option value="14px">14px</option>
+                  <option value="16px">16px</option>
+                  <option value="18px">18px</option>
+                  <option value="20px">20px</option>
+                  <option value="24px">24px</option>
+                  <option value="32px">32px</option>
+                  <option value="48px">48px</option>
+                </select>
+              </div>
+              <div class="style-row">
+                <span>Font Weight</span>
+                <select id="fontWeightSelect">
+                  <option value="">Default</option>
+                  <option value="400">Regular</option>
+                  <option value="500">Medium</option>
+                  <option value="600">Semibold</option>
+                  <option value="700">Bold</option>
+                </select>
+              </div>
+              <div class="style-row">
+                <span>Text Color</span>
+                <input type="color" id="textColorInput" value="#1e293b">
+              </div>
+              <div class="style-row">
+                <span>Background</span>
+                <input type="color" id="bgColorInput" value="#ffffff">
+              </div>
+            </div>
+            
+            <button class="apply-btn" id="applyChangesBtn">
+              <i data-lucide="check"></i>
+              Apply Changes
+            </button>
+            
+            <button class="delete-btn" id="deleteElementBtn">
+              <i data-lucide="trash-2"></i>
+              Delete Element
+            </button>
+          </div>
+        </div>
+
+        <!-- Section Editor -->
+        <div class="section-editor" id="sectionEditor" style="display: none;">
+          <div class="editor-header">
+            <span id="sectionTitle">Edit Section</span>
+            <button class="editor-close" id="closeSectionEditor"><i data-lucide="x"></i></button>
+          </div>
+          
+          <div class="editor-content">
+            <div class="editor-section">
+              <label class="editor-label">Background Color</label>
+              <input type="color" id="sectionBgColor" value="#ffffff">
+            </div>
+            
+            <div class="editor-section">
+              <label class="editor-label">Background Image URL</label>
+              <input type="text" id="sectionBgImage" placeholder="https://...">
+            </div>
+            
+            <div class="editor-section">
+              <label class="editor-label">Padding</label>
+              <div class="padding-presets">
+                <button class="preset-btn" data-padding="20">Small</button>
+                <button class="preset-btn active" data-padding="60">Medium</button>
+                <button class="preset-btn" data-padding="100">Large</button>
+              </div>
+            </div>
+            
+            <button class="apply-btn" id="applySectionBtn">
+              <i data-lucide="check"></i>
+              Apply Changes
+            </button>
+            
+            <div class="section-actions">
+              <button class="action-btn" id="duplicateSectionBtn"><i data-lucide="copy"></i> Duplicate</button>
+              <button class="action-btn" id="moveSectionUpBtn"><i data-lucide="arrow-up"></i> Move Up</button>
+              <button class="action-btn" id="moveSectionDownBtn"><i data-lucide="arrow-down"></i> Move Down</button>
+            </div>
+            
+            <button class="delete-btn" id="deleteSectionBtn">
+              <i data-lucide="trash-2"></i>
+              Delete Section
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Section Library Modal -->
+  <div class="modal-overlay" id="sectionLibraryModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add Section</h3>
+        <button class="modal-close" id="closeSectionModal"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="library-grid" id="libraryGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div class="modal-overlay" id="exportModal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3>Export Website HTML</h3>
+        <button class="modal-close" id="closeExportModal"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <textarea id="exportCodeArea" readonly></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn" id="copyExportBtn"><i data-lucide="copy"></i> Copy</button>
+        <button class="modal-btn primary" id="downloadExportBtn"><i data-lucide="download"></i> Download</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="/js/website-builder.js"></script>
+</body>
+</html>

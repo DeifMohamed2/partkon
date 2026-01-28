@@ -177,6 +177,7 @@ a { text-decoration: none; color: inherit; }
 .sidebar-nav-badge.success { background: var(--dash-success); }
 .sidebar-nav-badge.warning { background: var(--dash-warning); }
 .sidebar-nav-badge.info { background: var(--dash-info); }
+.sidebar-nav-badge.new { background: linear-gradient(135deg, var(--dash-primary), var(--dash-primary-light)); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3px; }
 
 .sidebar-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--dash-border); }
 

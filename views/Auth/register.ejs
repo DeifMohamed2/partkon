@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account - PartKon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         * {
@@ -80,10 +83,23 @@
         }
 
         @keyframes floatShape {
-            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            25% { transform: translate(30px, -40px) rotate(5deg) scale(1.05); }
-            50% { transform: translate(-20px, 30px) rotate(-5deg) scale(0.95); }
-            75% { transform: translate(-40px, -20px) rotate(3deg) scale(1.02); }
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: translate(30px, -40px) rotate(5deg) scale(1.05);
+            }
+
+            50% {
+                transform: translate(-20px, 30px) rotate(-5deg) scale(0.95);
+            }
+
+            75% {
+                transform: translate(-40px, -20px) rotate(3deg) scale(1.02);
+            }
         }
 
         /* Animated Lines */
@@ -105,16 +121,48 @@
             animation: linePulse 8s ease-in-out infinite;
         }
 
-        .line:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .line:nth-child(2) { left: 25%; animation-delay: -2s; }
-        .line:nth-child(3) { left: 40%; animation-delay: -4s; }
-        .line:nth-child(4) { left: 60%; animation-delay: -1s; }
-        .line:nth-child(5) { left: 75%; animation-delay: -3s; }
-        .line:nth-child(6) { left: 90%; animation-delay: -5s; }
+        .line:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .line:nth-child(2) {
+            left: 25%;
+            animation-delay: -2s;
+        }
+
+        .line:nth-child(3) {
+            left: 40%;
+            animation-delay: -4s;
+        }
+
+        .line:nth-child(4) {
+            left: 60%;
+            animation-delay: -1s;
+        }
+
+        .line:nth-child(5) {
+            left: 75%;
+            animation-delay: -3s;
+        }
+
+        .line:nth-child(6) {
+            left: 90%;
+            animation-delay: -5s;
+        }
 
         @keyframes linePulse {
-            0%, 100% { opacity: 0.3; transform: scaleY(1); }
-            50% { opacity: 0.6; transform: scaleY(1.1); }
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scaleY(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scaleY(1.1);
+            }
         }
 
         /* Floating Dots */
@@ -138,13 +186,26 @@
         }
 
         @keyframes dotFloat {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
         }
 
-        /* Navbar - Pure Glass Effect */
+        /* Navbar - Clean Style */
         .navbar-wrapper {
             position: fixed;
             top: 24px;
@@ -157,18 +218,14 @@
         .navbar {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(80px) saturate(180%);
-            -webkit-backdrop-filter: blur(80px) saturate(180%);
+            gap: 8px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 100px;
-            border: 1.5px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 
-                0 8px 32px rgba(255, 255, 255, 0.1),
-                0 4px 16px rgba(0, 0, 0, 0.05),
-                inset 0 2px 4px rgba(255, 255, 255, 0.4),
-                inset 0 -1px 2px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
         }
 
         .nav-logo {
@@ -178,33 +235,26 @@
             text-decoration: none;
             padding: 8px 16px 8px 8px;
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: transparent;
+            border: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-logo:hover {
-            background: rgba(255, 255, 255, 0.35);
-            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(99, 102, 241, 0.05);
         }
 
         .nav-logo-icon {
-          color:#ffff;
+            color: #fff;
             width: 38px;
             height: 38px;
-            background: rgba(99, 102, 241, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: #7C7FF4;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 
-                0 4px 12px rgba(99, 102, 241, 0.25),
-                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            border: none;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
         }
 
         .nav-logo-icon i {
@@ -215,56 +265,48 @@
 
         .nav-logo-text {
             font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #1e293b;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
         }
 
         .logo-highlight {
-            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #7C7FF4;
+            -webkit-text-fill-color: #7C7FF4;
         }
 
         .nav-divider {
             width: 1px;
             height: 24px;
-            background: rgba(255, 255, 255, 0.5);
-            margin: 0 4px;
+            background: #E2E8F0;
+            margin: 0 8px;
         }
 
         .nav-link {
-            color: #374151;
+            color: #475569;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
             padding: 12px 24px;
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: transparent;
+            border: 1px solid #E2E8F0;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
         }
 
         .nav-link:hover {
-            color: #111827;
-            background: rgba(255, 255, 255, 0.4);
-            border-color: rgba(255, 255, 255, 0.7);
+            color: #1e293b;
+            background: #F8FAFC;
+            border-color: #CBD5E1;
         }
 
         .nav-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 28px;
-            background: rgba(99, 102, 241, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            padding: 12px 24px;
+            background: #7C7FF4;
+            border: none;
             border-radius: 50px;
             color: white;
             font-size: 14px;
@@ -272,17 +314,13 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
-            box-shadow: 
-                0 4px 16px rgba(99, 102, 241, 0.2),
-                inset 0 2px 4px rgba(255, 255, 255, 0.25);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
         }
 
         .nav-btn:hover {
-            background: rgba(99, 102, 241, 0.8);
+            background: #6366F1;
             transform: translateY(-2px);
-            box-shadow: 
-                0 8px 28px rgba(99, 102, 241, 0.35),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
         }
 
         /* Main Content */
@@ -306,7 +344,7 @@
             border-radius: 28px;
             border: 1px solid rgba(255, 255, 255, 0.95);
             padding: 40px 44px;
-            box-shadow: 
+            box-shadow:
                 0 32px 64px -16px rgba(0, 0, 0, 0.08),
                 0 16px 32px -8px rgba(0, 0, 0, 0.04),
                 0 0 0 1px rgba(255, 255, 255, 0.9),
@@ -437,7 +475,7 @@
             transform: translateY(-2px);
         }
 
-        .role-card input:checked + .role-content {
+        .role-card input:checked+.role-content {
             border-color: #6366F1;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
             box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
@@ -455,7 +493,7 @@
             transition: all 0.3s;
         }
 
-        .role-card input:checked + .role-content .role-icon {
+        .role-card input:checked+.role-content .role-icon {
             background: linear-gradient(135deg, #6366F1, #8B5CF6);
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
         }
@@ -469,8 +507,8 @@
             transition: all 0.3s;
         }
 
-        .role-card input:checked + .role-content .role-icon i,
-        .role-card input:checked + .role-content .role-icon svg {
+        .role-card input:checked+.role-content .role-icon i,
+        .role-card input:checked+.role-content .role-icon svg {
             color: white !important;
             stroke: white !important;
         }
@@ -522,7 +560,7 @@
             transform: translateY(-2px);
         }
 
-        .team-card input:checked + .team-content {
+        .team-card input:checked+.team-content {
             border-color: #6366F1;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
             box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
@@ -574,7 +612,7 @@
             transform: translateY(-2px);
         }
 
-        .source-card input:checked + .source-content {
+        .source-card input:checked+.source-content {
             border-color: #6366F1;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
             box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
@@ -684,6 +722,7 @@
                 opacity: 0;
                 transform: translateY(40px) scale(0.98);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
@@ -877,7 +916,7 @@
             outline: none;
             background: #fff;
             border-color: #6366F1;
-            box-shadow: 
+            box-shadow:
                 0 0 0 4px rgba(99, 102, 241, 0.12),
                 0 4px 16px rgba(99, 102, 241, 0.1);
         }
@@ -940,9 +979,20 @@
             transition: all 0.3s ease;
         }
 
-        .strength-fill.weak { width: 33%; background: #EF4444; }
-        .strength-fill.medium { width: 66%; background: #F59E0B; }
-        .strength-fill.strong { width: 100%; background: #10B981; }
+        .strength-fill.weak {
+            width: 33%;
+            background: #EF4444;
+        }
+
+        .strength-fill.medium {
+            width: 66%;
+            background: #F59E0B;
+        }
+
+        .strength-fill.strong {
+            width: 100%;
+            background: #10B981;
+        }
 
         .strength-text {
             font-size: 12px;
@@ -950,9 +1000,17 @@
             font-weight: 500;
         }
 
-        .strength-text.weak { color: #EF4444; }
-        .strength-text.medium { color: #F59E0B; }
-        .strength-text.strong { color: #10B981; }
+        .strength-text.weak {
+            color: #EF4444;
+        }
+
+        .strength-text.medium {
+            color: #F59E0B;
+        }
+
+        .strength-text.strong {
+            color: #10B981;
+        }
 
         /* Terms */
         .terms-group {
@@ -990,7 +1048,7 @@
             transition: all 0.2s;
         }
 
-        .custom-checkbox input:checked ~ .checkmark {
+        .custom-checkbox input:checked~.checkmark {
             background: linear-gradient(135deg, #6366F1, #8B5CF6);
             border-color: transparent;
         }
@@ -1008,7 +1066,7 @@
             transform: rotate(45deg);
         }
 
-        .custom-checkbox input:checked ~ .checkmark::after {
+        .custom-checkbox input:checked~.checkmark::after {
             display: block;
         }
 
@@ -1056,7 +1114,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.6s ease;
         }
 
@@ -1064,7 +1122,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1));
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -1175,6 +1233,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Animated Background -->
     <div class="bg-animation">
@@ -1183,7 +1242,7 @@
         <div class="shape shape-3"></div>
         <div class="shape shape-4"></div>
     </div>
-    
+
     <div class="bg-lines">
         <div class="line"></div>
         <div class="line"></div>
@@ -1224,7 +1283,7 @@
             <!-- Steps Container -->
             <div class="steps-wrapper">
                 <div class="steps-container" id="stepsContainer">
-                    
+
                     <!-- Step 1: Role Selection -->
                     <div class="step active" data-step="1">
                         <div class="step-header">
@@ -1412,7 +1471,8 @@
                                 <label for="password">Password</label>
                                 <div class="input-wrapper">
                                     <i data-lucide="lock" class="input-icon"></i>
-                                    <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                                    <input type="password" id="password" name="password"
+                                        placeholder="Create a strong password" required>
                                     <button type="button" class="password-toggle" onclick="togglePassword('password')">
                                         <i data-lucide="eye" id="password-eye"></i>
                                     </button>
@@ -1431,7 +1491,8 @@
                                     <span class="checkmark"></span>
                                 </label>
                                 <span class="terms-text">
-                                    I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>
+                                    I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy
+                                        Policy</a>
                                 </span>
                             </div>
                         </form>
@@ -1442,7 +1503,8 @@
 
             <!-- Navigation Buttons -->
             <div class="step-navigation">
-                <button type="button" class="nav-btn-back" id="backBtn" onclick="prevStep()" style="visibility: hidden;">
+                <button type="button" class="nav-btn-back" id="backBtn" onclick="prevStep()"
+                    style="visibility: hidden;">
                     <i data-lucide="arrow-left"></i>
                     Back
                 </button>
@@ -1505,7 +1567,7 @@
 
             // Update buttons
             backBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
-            
+
             if (currentStep === totalSteps) {
                 nextBtn.innerHTML = 'Create Account <i data-lucide="check"></i>';
             } else {
@@ -1562,7 +1624,7 @@
 
         function submitForm() {
             const form = document.getElementById('registerForm');
-            
+
             // Add hidden inputs for previous step data
             const role = document.querySelector('input[name="role"]:checked')?.value;
             const teamSize = document.querySelector('input[name="teamSize"]:checked')?.value;
@@ -1597,7 +1659,7 @@
 
         // Add click handlers for radio buttons to auto-advance (optional nice UX)
         document.querySelectorAll('.role-card input, .team-card input, .source-card input').forEach(input => {
-            input.addEventListener('change', function() {
+            input.addEventListener('change', function () {
                 // Small delay for visual feedback
                 setTimeout(() => {
                     lucide.createIcons();
@@ -1609,7 +1671,7 @@
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             const eyeIcon = document.getElementById(inputId + '-eye');
-            
+
             if (input.type === 'password') {
                 input.type = 'text';
                 eyeIcon.setAttribute('data-lucide', 'eye-off');
@@ -1625,10 +1687,10 @@
         const strengthFill = document.getElementById('strength-fill');
         const strengthText = document.getElementById('strength-text');
 
-        passwordInput.addEventListener('input', function() {
+        passwordInput.addEventListener('input', function () {
             const password = this.value;
             let strength = 0;
-            
+
             if (password.length >= 8) strength++;
             if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
             if (password.match(/[0-9]/)) strength++;
@@ -1671,4 +1733,5 @@
         updateStep();
     </script>
 </body>
+
 </html>

@@ -10,7 +10,7 @@ const {
   getAnalytics,
   getSettings,
   getAppearance
-} = require('../controllers/dashboardController');
+} = require('../controllers/customerController');
 
 // ============================================
 // PUBLIC ROUTES (No authentication required)
@@ -44,7 +44,7 @@ router.get('/dashboard/settings', requireAuth, getSettings);
 
 // Placeholder routes for other pages
 router.get('/dashboard/products', requireAuth, (req, res) => {
-  res.render('Dashboard/coming-soon', { 
+  res.render('Customer/coming-soon', {
     title: 'Products | PartKon Dashboard',
     pageName: 'Products Management',
     user: req.user
@@ -52,7 +52,7 @@ router.get('/dashboard/products', requireAuth, (req, res) => {
 });
 
 router.get('/dashboard/customers', requireAuth, (req, res) => {
-  res.render('Dashboard/coming-soon', { 
+  res.render('Customer/coming-soon', {
     title: 'Customers | PartKon Dashboard',
     pageName: 'Customer Management',
     user: req.user
@@ -60,7 +60,7 @@ router.get('/dashboard/customers', requireAuth, (req, res) => {
 });
 
 router.get('/dashboard/pages', requireAuth, (req, res) => {
-  res.render('Dashboard/coming-soon', { 
+  res.render('Customer/coming-soon', {
     title: 'Pages | PartKon Dashboard',
     pageName: 'Pages Management',
     user: req.user
@@ -68,7 +68,7 @@ router.get('/dashboard/pages', requireAuth, (req, res) => {
 });
 
 router.get('/dashboard/domain', requireAuth, (req, res) => {
-  res.render('Dashboard/coming-soon', { 
+  res.render('Customer/coming-soon', {
     title: 'Domain | PartKon Dashboard',
     pageName: 'Domain Settings',
     user: req.user
@@ -76,7 +76,7 @@ router.get('/dashboard/domain', requireAuth, (req, res) => {
 });
 
 router.get('/dashboard/billing', requireAuth, (req, res) => {
-  res.render('Dashboard/coming-soon', { 
+  res.render('Customer/coming-soon', {
     title: 'Billing | PartKon Dashboard',
     pageName: 'Billing & Subscriptions',
     user: req.user
@@ -84,7 +84,7 @@ router.get('/dashboard/billing', requireAuth, (req, res) => {
 });
 
 router.get('/dashboard/support', requireAuth, (req, res) => {
-  res.render('Dashboard/coming-soon', { 
+  res.render('Customer/coming-soon', {
     title: 'Support | PartKon Dashboard',
     pageName: 'Help & Support',
     user: req.user
@@ -92,10 +92,34 @@ router.get('/dashboard/support', requireAuth, (req, res) => {
 });
 
 router.get('/dashboard/account', requireAuth, (req, res) => {
-  res.render('Dashboard/coming-soon', { 
+  res.render('Customer/coming-soon', {
     title: 'Account | PartKon Dashboard',
     pageName: 'Account Settings',
     user: req.user
+  });
+});
+
+// Themes
+router.get('/dashboard/themes', requireAuth, (req, res) => {
+  res.render('Customer/themes', {
+    title: 'Website Themes | PartKon Dashboard',
+    user: req.user,
+    activePage: 'themes',
+    stats: req.user.stats || {},
+    notifications: req.user.notifications || [],
+    website: req.user.website || {}
+  });
+});
+
+// Website Builder
+router.get('/dashboard/website-builder', requireAuth, (req, res) => {
+  res.render('Customer/website-builder', {
+    title: 'Website Builder | PartKon Dashboard',
+    user: req.user,
+    activePage: 'website-builder',
+    stats: req.user.stats || {},
+    notifications: req.user.notifications || [],
+    website: req.user.website || {}
   });
 });
 

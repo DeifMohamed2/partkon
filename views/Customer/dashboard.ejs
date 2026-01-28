@@ -1,0 +1,1303 @@
+<%- include('partials/header') %>
+  <link rel="stylesheet" href="/css/customer/dashboard.css">
+  </head>
+
+  <body>
+    <div class="dash-wrapper">
+      <%- include('partials/sidebar', { activePage: 'dashboard' , user: user, stats: stats }) %>
+
+        <main class="dash-main">
+          <%- include('partials/topbar', { pageTitle: 'Dashboard' , notifications: notifications, website: website }) %>
+
+            <div class="dash-content">
+              
+              <!-- Plan & Trial Progress Section -->
+              <% const now = new Date(); 
+                 const trialEnd = new Date(user.trialEndsAt);
+                 const trialStart = new Date(user.trialStartedAt || now);
+                 const totalTrialDays = Math.ceil((trialEnd - trialStart) / (1000 * 60 * 60 * 24));
+                 const daysLeft = Math.max(0, Math.ceil((trialEnd - now) / (1000 * 60 * 60 * 24)));
+                 const daysUsed = totalTrialDays - daysLeft;
+                 const progressPercent = Math.min(100, (daysUsed / totalTrialDays) * 100);
+                 const isTrialExpiring = daysLeft <= 3;
+              %>
+              
+              <div class="plan-progress-card <%= isTrialExpiring ? 'expiring' : '' %>">
+                <div class="plan-progress-header">
+                  <div class="plan-info">
+                    <div class="plan-icon">
+                      <i data-lucide="<%= user.planType === 'trial' ? 'rocket' : 'crown' %>"></i>
+                    </div>
+                    <div class="plan-details">
+                      <div class="plan-title">
+                        <span class="plan-name"><%= user.plan %></span>
+                        <% if (user.planType === 'trial') { %>
+                          <span class="plan-badge trial">
+                            <i data-lucide="clock"></i>
+                            Free Trial
+                          </span>
+                        <% } else if (user.planType === 'pro') { %>
+                          <span class="plan-badge pro">
+                            <i data-lucide="zap"></i>
+                            Pro
+                          </span>
+                        <% } %>
+                      </div>
+                      <p class="plan-subtitle">
+                        <% if (user.planType === 'trial') { %>
+                          <%= daysLeft %> days remaining • Ends <%= trialEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
+                        <% } else { %>
+                          $<%= user.planPrice %>/<%= user.billingCycle === 'monthly' ? 'month' : 'year' %> • Next billing on Feb 15, 2026
+                        <% } %>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="plan-actions">
+                    <% if (user.planType === 'trial') { %>
+                      <a href="/dashboard/billing" class="dash-btn dash-btn-primary dash-btn-sm upgrade-pulse">
+                        <i data-lucide="sparkles"></i>
+                        Upgrade to Pro
+                      </a>
+                    <% } else { %>
+                      <a href="/dashboard/billing" class="dash-btn dash-btn-secondary dash-btn-sm">
+                        <i data-lucide="credit-card"></i>
+                        Manage Billing
+                      </a>
+                    <% } %>
+                  </div>
+                </div>
+                
+                <% if (user.planType === 'trial') { %>
+                  <div class="trial-progress-section">
+                    <div class="trial-progress-bar">
+                      <div class="trial-progress-fill <%= isTrialExpiring ? 'warning' : '' %>" style="width: <%= progressPercent %>%"></div>
+                      <div class="trial-progress-marker" style="left: <%= progressPercent %>%">
+                        <span class="marker-tooltip"><%= daysUsed %> of <%= totalTrialDays %> days</span>
+                      </div>
+                    </div>
+                    <div class="trial-progress-labels">
+                      <span>Trial Started</span>
+                      <span class="<%= isTrialExpiring ? 'warning-text' : '' %>">
+                        <i data-lucide="<%= isTrialExpiring ? 'alert-triangle' : 'calendar' %>"></i>
+                        <%= daysLeft %> days left
+                      </span>
+                    </div>
+                  </div>
+                <% } %>
+                
+                <div class="plan-features-row">
+                  <% user.planFeatures.slice(0, 4).forEach(feature => { %>
+                    <span class="feature-chip">
+                      <i data-lucide="check-circle-2"></i>
+                      <%= feature %>
+                    </span>
+                  <% }); %>
+                  <% if (user.planFeatures.length > 4) { %>
+                    <span class="feature-chip more">+<%= user.planFeatures.length - 4 %> more</span>
+                  <% } %>
+                </div>
+              </div>
+
+              <!-- Website Status & Domain Section -->
+              <div class="website-builder-grid">
+                <!-- Website Preview Card -->
+                <div class="website-preview-card">
+                  <div class="preview-header">
+                    <div class="preview-status <%= website.status %>">
+                      <span class="status-pulse"></span>
+                      <%= website.status === 'online' ? 'Live' : website.status === 'maintenance' ? 'Maintenance' : 'Offline' %>
+                    </div>
+                    <div class="preview-uptime">
+                      <i data-lucide="activity"></i>
+                      <%= website.uptime %>% uptime
+                    </div>
+                  </div>
+                  <div class="preview-browser">
+                    <div class="browser-bar">
+                      <div class="browser-dots">
+                        <span></span><span></span><span></span>
+                      </div>
+                      <div class="browser-url">
+                        <i data-lucide="lock"></i>
+                        <%= website.customDomain || website.url.replace('https://', '') %>
+                      </div>
+                      <div class="browser-actions">
+                        <a href="<%= website.url %>" target="_blank" title="Open in new tab">
+                          <i data-lucide="external-link"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="browser-content">
+                      <div class="site-thumbnail">
+                        <div class="thumbnail-placeholder">
+                          <i data-lucide="layout"></i>
+                          <span><%= website.name %></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="preview-footer">
+                    <div class="preview-meta">
+                      <span><i data-lucide="file-text"></i> <%= website.pages.published %> pages</span>
+                      <span><i data-lucide="clock"></i> Updated <%= new Date(website.lastPublished).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) %></span>
+                    </div>
+                    <div class="preview-actions">
+                      <a href="/dashboard/editor" class="dash-btn dash-btn-primary dash-btn-sm">
+                        <i data-lucide="edit-3"></i>
+                        Edit Site
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Domain & SSL Status -->
+                <div class="domain-status-card">
+                  <div class="card-section-header">
+                    <h3><i data-lucide="globe"></i> Domain & SSL</h3>
+                  </div>
+                  
+                  <div class="domain-item primary">
+                    <div class="domain-icon">
+                      <i data-lucide="link-2"></i>
+                    </div>
+                    <div class="domain-info">
+                      <span class="domain-label">Primary Domain</span>
+                      <a href="https://<%= website.customDomain %>" target="_blank" class="domain-value"><%= website.customDomain %></a>
+                    </div>
+                    <span class="domain-badge connected">
+                      <i data-lucide="check-circle"></i>
+                      Connected
+                    </span>
+                  </div>
+                  
+                  <div class="domain-item">
+                    <div class="domain-icon ssl">
+                      <i data-lucide="shield-check"></i>
+                    </div>
+                    <div class="domain-info">
+                      <span class="domain-label">SSL Certificate</span>
+                      <span class="domain-value">Valid until <%= new Date(website.sslExpiresAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></span>
+                    </div>
+                    <span class="domain-badge active">
+                      <i data-lucide="lock"></i>
+                      Active
+                    </span>
+                  </div>
+                  
+                  <div class="domain-item">
+                    <div class="domain-icon subdomain">
+                      <i data-lucide="git-branch"></i>
+                    </div>
+                    <div class="domain-info">
+                      <span class="domain-label">PartKon Subdomain</span>
+                      <a href="<%= website.url %>" target="_blank" class="domain-value subdomain"><%= website.url.replace('https://', '') %></a>
+                    </div>
+                    <span class="domain-badge active">
+                      <i data-lucide="check"></i>
+                      Active
+                    </span>
+                  </div>
+                  
+                  <a href="/dashboard/domains" class="domain-manage-link">
+                    <i data-lucide="settings"></i>
+                    Manage Domains
+                  </a>
+                </div>
+
+                <!-- Performance Scores -->
+                <div class="performance-card">
+                  <div class="card-section-header">
+                    <h3><i data-lucide="gauge"></i> Site Performance</h3>
+                    <span class="performance-updated">Updated 2h ago</span>
+                  </div>
+                  
+                  <div class="performance-scores">
+                    <div class="score-circle main">
+                      <svg viewBox="0 0 120 120">
+                        <circle class="score-bg" cx="60" cy="60" r="52"/>
+                        <circle class="score-fill" cx="60" cy="60" r="52" 
+                          stroke-dasharray="327" 
+                          stroke-dashoffset="<%= 327 - (327 * website.performance.score / 100) %>"/>
+                      </svg>
+                      <div class="score-value">
+                        <span class="score-number"><%= website.performance.score %></span>
+                        <span class="score-label">Overall</span>
+                      </div>
+                    </div>
+                    
+                    <div class="score-details">
+                      <div class="score-item">
+                        <div class="score-item-header">
+                          <span><i data-lucide="smartphone"></i> Mobile</span>
+                          <span class="score-mini <%= website.performance.mobileScore >= 80 ? 'good' : website.performance.mobileScore >= 50 ? 'medium' : 'poor' %>">
+                            <%= website.performance.mobileScore %>
+                          </span>
+                        </div>
+                        <div class="score-bar">
+                          <div class="score-bar-fill good" style="width: <%= website.performance.mobileScore %>%"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="score-item">
+                        <div class="score-item-header">
+                          <span><i data-lucide="search"></i> SEO</span>
+                          <span class="score-mini <%= website.performance.seoScore >= 80 ? 'good' : website.performance.seoScore >= 50 ? 'medium' : 'poor' %>">
+                            <%= website.performance.seoScore %>
+                          </span>
+                        </div>
+                        <div class="score-bar">
+                          <div class="score-bar-fill good" style="width: <%= website.performance.seoScore %>%"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="score-item">
+                        <div class="score-item-header">
+                          <span><i data-lucide="accessibility"></i> Accessibility</span>
+                          <span class="score-mini <%= website.performance.accessibilityScore >= 80 ? 'good' : website.performance.accessibilityScore >= 50 ? 'medium' : 'poor' %>">
+                            <%= website.performance.accessibilityScore %>
+                          </span>
+                        </div>
+                        <div class="score-bar">
+                          <div class="score-bar-fill good" style="width: <%= website.performance.accessibilityScore %>%"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="score-item">
+                        <div class="score-item-header">
+                          <span><i data-lucide="zap"></i> Load Time</span>
+                          <span class="score-mini good"><%= website.performance.loadTime %>s</span>
+                        </div>
+                        <div class="score-bar">
+                          <div class="score-bar-fill good" style="width: <%= Math.max(0, 100 - (website.performance.loadTime * 20)) %>%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <a href="/dashboard/performance" class="run-test-btn">
+                    <i data-lucide="play"></i>
+                    Run New Test
+                  </a>
+                </div>
+              </div>
+
+              <!-- Resource Usage Section -->
+              <div class="resource-usage-card">
+                <div class="resource-header">
+                  <h3><i data-lucide="hard-drive"></i> Resource Usage</h3>
+                  <a href="/dashboard/billing" class="resource-upgrade">
+                    <i data-lucide="trending-up"></i>
+                    Upgrade Limits
+                  </a>
+                </div>
+                <div class="resource-grid">
+                  <div class="resource-item">
+                    <div class="resource-icon storage">
+                      <i data-lucide="database"></i>
+                    </div>
+                    <div class="resource-info">
+                      <div class="resource-label">Storage</div>
+                      <div class="resource-value"><%= user.planLimits.storage.used %> GB <span class="resource-limit">/ <%= user.planLimits.storage.limit %> GB</span></div>
+                    </div>
+                    <div class="resource-progress">
+                      <div class="resource-bar">
+                        <div class="resource-fill <%= (user.planLimits.storage.used / user.planLimits.storage.limit * 100) > 80 ? 'warning' : '' %>" 
+                             style="width: <%= (user.planLimits.storage.used / user.planLimits.storage.limit * 100) %>%"></div>
+                      </div>
+                      <span class="resource-percent"><%= Math.round(user.planLimits.storage.used / user.planLimits.storage.limit * 100) %>%</span>
+                    </div>
+                  </div>
+                  
+                  <div class="resource-item">
+                    <div class="resource-icon bandwidth">
+                      <i data-lucide="wifi"></i>
+                    </div>
+                    <div class="resource-info">
+                      <div class="resource-label">Bandwidth</div>
+                      <div class="resource-value"><%= user.planLimits.bandwidth.used %> GB <span class="resource-limit">/ <%= user.planLimits.bandwidth.limit %> GB</span></div>
+                    </div>
+                    <div class="resource-progress">
+                      <div class="resource-bar">
+                        <div class="resource-fill" style="width: <%= (user.planLimits.bandwidth.used / user.planLimits.bandwidth.limit * 100) %>%"></div>
+                      </div>
+                      <span class="resource-percent"><%= Math.round(user.planLimits.bandwidth.used / user.planLimits.bandwidth.limit * 100) %>%</span>
+                    </div>
+                  </div>
+                  
+                  <div class="resource-item">
+                    <div class="resource-icon emails">
+                      <i data-lucide="mail"></i>
+                    </div>
+                    <div class="resource-info">
+                      <div class="resource-label">Emails Sent</div>
+                      <div class="resource-value"><%= user.planLimits.emailsPerMonth.used.toLocaleString() %> <span class="resource-limit">/ <%= user.planLimits.emailsPerMonth.limit.toLocaleString() %></span></div>
+                    </div>
+                    <div class="resource-progress">
+                      <div class="resource-bar">
+                        <div class="resource-fill" style="width: <%= (user.planLimits.emailsPerMonth.used / user.planLimits.emailsPerMonth.limit * 100) %>%"></div>
+                      </div>
+                      <span class="resource-percent"><%= Math.round(user.planLimits.emailsPerMonth.used / user.planLimits.emailsPerMonth.limit * 100) %>%</span>
+                    </div>
+                  </div>
+                  
+                  <div class="resource-item">
+                    <div class="resource-icon team">
+                      <i data-lucide="users"></i>
+                    </div>
+                    <div class="resource-info">
+                      <div class="resource-label">Team Members</div>
+                      <div class="resource-value"><%= user.planLimits.teamMembers.used %> <span class="resource-limit">/ <%= user.planLimits.teamMembers.limit %> seats</span></div>
+                    </div>
+                    <div class="resource-progress">
+                      <div class="resource-bar">
+                        <div class="resource-fill" style="width: <%= (user.planLimits.teamMembers.used / user.planLimits.teamMembers.limit * 100) %>%"></div>
+                      </div>
+                      <span class="resource-percent"><%= Math.round(user.planLimits.teamMembers.used / user.planLimits.teamMembers.limit * 100) %>%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Real-time Stats Banner -->
+              <div class="realtime-banner">
+                <div class="realtime-pulse">
+                  <span class="pulse-dot"></span>
+                  <span class="pulse-ring"></span>
+                </div>
+                <div class="realtime-content">
+                  <span class="realtime-count"><%= chartData.realTimeVisitors %></span>
+                  <span class="realtime-label">visitors on your site right now</span>
+                </div>
+                <div class="realtime-pages">
+                  <span class="page-item"><i data-lucide="file-text"></i> Home (18)</span>
+                  <span class="page-item"><i data-lucide="shopping-bag"></i> Products (12)</span>
+                  <span class="page-item"><i data-lucide="shopping-cart"></i> Cart (9)</span>
+                </div>
+              </div>
+
+              <!-- Stats Grid with Enhanced Design -->
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-icon-wrapper blue">
+                    <i data-lucide="receipt"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-label">Total Orders</div>
+                    <div class="stat-value"><%= stats.totalOrders.toLocaleString() %></div>
+                    <div class="stat-footer">
+                      <div class="stat-change positive">
+                        <i data-lucide="trending-up"></i>
+                        +<%= stats.ordersGrowth %>%
+                      </div>
+                      <span class="stat-period">vs last week</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="stat-card">
+                  <div class="stat-icon-wrapper green">
+                    <i data-lucide="wallet"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-label">Total Revenue</div>
+                    <div class="stat-value">$<%= stats.totalRevenue.toLocaleString() %></div>
+                    <div class="stat-footer">
+                      <div class="stat-change positive">
+                        <i data-lucide="trending-up"></i>
+                        +<%= stats.revenueGrowth %>%
+                      </div>
+                      <span class="stat-period">vs last week</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="stat-card">
+                  <div class="stat-icon-wrapper purple">
+                    <i data-lucide="mouse-pointer-click"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-label">Visitors</div>
+                    <div class="stat-value"><%= stats.totalVisitors.toLocaleString() %></div>
+                    <div class="stat-footer">
+                      <div class="stat-change positive">
+                        <i data-lucide="trending-up"></i>
+                        +<%= stats.visitorsGrowth %>%
+                      </div>
+                      <span class="stat-period">vs last week</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="stat-card">
+                  <div class="stat-icon-wrapper orange">
+                    <i data-lucide="target"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-label">Conversion Rate</div>
+                    <div class="stat-value"><%= stats.conversionRate %>%</div>
+                    <div class="stat-footer">
+                      <div class="stat-change <%= stats.conversionGrowth >= 0 ? 'positive' : 'negative' %>">
+                        <i data-lucide="<%= stats.conversionGrowth >= 0 ? 'trending-up' : 'trending-down' %>"></i>
+                        <%= stats.conversionGrowth >= 0 ? '+' : '' %><%= stats.conversionGrowth %>%
+                      </div>
+                      <span class="stat-period">vs last week</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Website Builder Quick Actions -->
+              <div class="builder-actions-grid">
+                <a href="/dashboard/editor" class="builder-action-card primary">
+                  <div class="builder-action-icon">
+                    <i data-lucide="layout"></i>
+                  </div>
+                  <div class="builder-action-content">
+                    <h4>Edit Website</h4>
+                    <p>Customize pages, layouts & content</p>
+                  </div>
+                  <i data-lucide="arrow-right" class="action-arrow"></i>
+                </a>
+                
+                <a href="/dashboard/products" class="builder-action-card">
+                  <div class="builder-action-icon green">
+                    <i data-lucide="package-plus"></i>
+                  </div>
+                  <div class="builder-action-content">
+                    <h4>Add Product</h4>
+                    <p><%= stats.totalProducts %> products in catalog</p>
+                  </div>
+                  <i data-lucide="arrow-right" class="action-arrow"></i>
+                </a>
+                
+                <a href="/dashboard/appearance" class="builder-action-card">
+                  <div class="builder-action-icon purple">
+                    <i data-lucide="palette"></i>
+                  </div>
+                  <div class="builder-action-content">
+                    <h4>Customize Theme</h4>
+                    <p>Colors, fonts & branding</p>
+                  </div>
+                  <i data-lucide="arrow-right" class="action-arrow"></i>
+                </a>
+                
+                <a href="/dashboard/seo" class="builder-action-card">
+                  <div class="builder-action-icon orange">
+                    <i data-lucide="search-code"></i>
+                  </div>
+                  <div class="builder-action-content">
+                    <h4>SEO Settings</h4>
+                    <p>Optimize for search engines</p>
+                  </div>
+                  <i data-lucide="arrow-right" class="action-arrow"></i>
+                </a>
+              </div>
+
+              <!-- Charts Grid -->
+              <div class="charts-grid">
+                <!-- Revenue Chart -->
+                <div class="chart-card">
+                  <div class="chart-card-header">
+                    <div class="chart-header-left">
+                      <h3 class="chart-card-title">
+                        <i data-lucide="line-chart"></i>
+                        Revenue Overview
+                      </h3>
+                      <p class="chart-subtitle">Sales performance over time</p>
+                    </div>
+                    <div class="chart-card-actions">
+                      <button class="chart-filter-btn active" data-range="7d" data-chart="revenue">7D</button>
+                      <button class="chart-filter-btn" data-range="30d" data-chart="revenue">30D</button>
+                      <button class="chart-filter-btn" data-range="90d" data-chart="revenue">90D</button>
+                    </div>
+                  </div>
+                  <div class="chart-card-body">
+                    <div class="chart-container">
+                      <canvas id="revenueChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Orders by Status Chart -->
+                <div class="chart-card">
+                  <div class="chart-card-header">
+                    <div class="chart-header-left">
+                      <h3 class="chart-card-title">
+                        <i data-lucide="pie-chart"></i>
+                        Orders by Status
+                      </h3>
+                      <p class="chart-subtitle">Current order distribution</p>
+                    </div>
+                  </div>
+                  <div class="chart-card-body">
+                    <div class="chart-container doughnut-container">
+                      <canvas id="ordersStatusChart"></canvas>
+                      <div class="doughnut-center">
+                        <span class="doughnut-value"><%= stats.totalOrders %></span>
+                        <span class="doughnut-label">Total Orders</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Conversion Funnel -->
+              <div class="funnel-card">
+                <div class="chart-card-header">
+                  <div class="chart-header-left">
+                    <h3 class="chart-card-title">
+                      <i data-lucide="filter"></i>
+                      Conversion Funnel
+                    </h3>
+                    <p class="chart-subtitle">Customer journey from visit to purchase</p>
+                  </div>
+                </div>
+                <div class="funnel-body">
+                  <% const funnelData = chartData.conversionFunnel;
+                     const maxValue = funnelData.data[0];
+                  %>
+                  <% funnelData.labels.forEach((label, index) => { 
+                    const value = funnelData.data[index];
+                    const width = (value / maxValue * 100);
+                    const prevValue = index > 0 ? funnelData.data[index - 1] : value;
+                    const dropoff = index > 0 ? ((prevValue - value) / prevValue * 100).toFixed(1) : 0;
+                  %>
+                    <div class="funnel-step">
+                      <div class="funnel-bar-wrapper">
+                        <div class="funnel-bar" style="width: <%= width %>%">
+                          <span class="funnel-value"><%= value.toLocaleString() %></span>
+                        </div>
+                      </div>
+                      <div class="funnel-label">
+                        <span class="funnel-step-name"><%= label %></span>
+                        <% if (index > 0) { %>
+                          <span class="funnel-dropoff">-<%= dropoff %>%</span>
+                        <% } %>
+                      </div>
+                    </div>
+                  <% }); %>
+                </div>
+              </div>
+
+              <!-- Analytics Mini Cards -->
+              <div class="analytics-mini-grid">
+                <div class="analytics-mini-card">
+                  <div class="analytics-mini-icon blue">
+                    <i data-lucide="eye"></i>
+                  </div>
+                  <div class="analytics-mini-content">
+                    <div class="analytics-mini-value"><%= chartData.pageViews.data.reduce((a, b) => a + b, 0).toLocaleString() %></div>
+                    <div class="analytics-mini-label">Page Views (7D)</div>
+                  </div>
+                  <div class="analytics-mini-trend positive">
+                    <i data-lucide="trending-up"></i>
+                    +18.5%
+                  </div>
+                </div>
+                
+                <div class="analytics-mini-card">
+                  <div class="analytics-mini-icon purple">
+                    <i data-lucide="timer"></i>
+                  </div>
+                  <div class="analytics-mini-content">
+                    <div class="analytics-mini-value"><%= Math.floor(chartData.avgSessionDuration / 60) %>m <%= chartData.avgSessionDuration % 60 %>s</div>
+                    <div class="analytics-mini-label">Avg. Session</div>
+                  </div>
+                  <div class="analytics-mini-trend positive">
+                    <i data-lucide="trending-up"></i>
+                    +5.2%
+                  </div>
+                </div>
+                
+                <div class="analytics-mini-card">
+                  <div class="analytics-mini-icon orange">
+                    <i data-lucide="log-out"></i>
+                  </div>
+                  <div class="analytics-mini-content">
+                    <div class="analytics-mini-value"><%= (chartData.bounceRate.data.reduce((a, b) => a + b, 0) / chartData.bounceRate.data.length).toFixed(1) %>%</div>
+                    <div class="analytics-mini-label">Bounce Rate</div>
+                  </div>
+                  <div class="analytics-mini-trend negative">
+                    <i data-lucide="trending-down"></i>
+                    -3.1%
+                  </div>
+                </div>
+                
+                <div class="analytics-mini-card">
+                  <div class="analytics-mini-icon green">
+                    <i data-lucide="user-plus"></i>
+                  </div>
+                  <div class="analytics-mini-content">
+                    <div class="analytics-mini-value"><%= stats.newCustomers %></div>
+                    <div class="analytics-mini-label">New Customers</div>
+                  </div>
+                  <div class="analytics-mini-trend positive">
+                    <i data-lucide="trending-up"></i>
+                    +<%= stats.customersGrowth %>%
+                  </div>
+                </div>
+              </div>
+
+              <!-- Visitors & Traffic Row -->
+              <div class="charts-grid">
+                <!-- Visitors Trend Chart -->
+                <div class="chart-card">
+                  <div class="chart-card-header">
+                    <div class="chart-header-left">
+                      <h3 class="chart-card-title">
+                        <i data-lucide="users"></i>
+                        Visitors Trend
+                      </h3>
+                      <p class="chart-subtitle">Daily unique visitors</p>
+                    </div>
+                    <div class="chart-summary">
+                      <span class="summary-value"><%= chartData.visitors.data.reduce((a, b) => a + b, 0).toLocaleString() %></span>
+                      <span class="summary-label">this week</span>
+                    </div>
+                  </div>
+                  <div class="chart-card-body">
+                    <div class="chart-container">
+                      <canvas id="visitorsChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Device Breakdown -->
+                <div class="chart-card">
+                  <div class="chart-card-header">
+                    <div class="chart-header-left">
+                      <h3 class="chart-card-title">
+                        <i data-lucide="monitor-smartphone"></i>
+                        Device Breakdown
+                      </h3>
+                      <p class="chart-subtitle">Visitors by device type</p>
+                    </div>
+                  </div>
+                  <div class="chart-card-body">
+                    <div class="chart-container">
+                      <canvas id="devicesChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Geographic & Traffic Sources -->
+              <div class="charts-grid">
+                <!-- Traffic Sources Chart -->
+                <div class="chart-card">
+                  <div class="chart-card-header">
+                    <div class="chart-header-left">
+                      <h3 class="chart-card-title">
+                        <i data-lucide="share-2"></i>
+                        Traffic Sources
+                      </h3>
+                      <p class="chart-subtitle">Where your visitors come from</p>
+                    </div>
+                  </div>
+                  <div class="chart-card-body">
+                    <div class="chart-container">
+                      <canvas id="trafficSourcesChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Top Locations -->
+                <div class="chart-card locations-card">
+                  <div class="chart-card-header">
+                    <div class="chart-header-left">
+                      <h3 class="chart-card-title">
+                        <i data-lucide="map-pin"></i>
+                        Top Locations
+                      </h3>
+                      <p class="chart-subtitle">Visitors by country</p>
+                    </div>
+                  </div>
+                  <div class="locations-list">
+                    <% chartData.geoData.labels.forEach((country, index) => { %>
+                      <div class="location-item">
+                        <div class="location-rank"><%= index + 1 %></div>
+                        <div class="location-info">
+                          <span class="location-name"><%= country %></span>
+                          <span class="location-visitors"><%= chartData.geoData.visitors[index].toLocaleString() %> visitors</span>
+                        </div>
+                        <div class="location-bar">
+                          <div class="location-fill" style="width: <%= chartData.geoData.data[index] %>%"></div>
+                        </div>
+                        <span class="location-percent"><%= chartData.geoData.data[index] %>%</span>
+                      </div>
+                    <% }); %>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Orders Table -->
+              <div class="orders-table-card">
+                <div class="orders-table-header">
+                  <div class="orders-header-left">
+                    <h3>
+                      <i data-lucide="package"></i>
+                      Recent Orders
+                    </h3>
+                    <span class="orders-count"><%= orders.length %> orders</span>
+                  </div>
+                  <a href="/dashboard/orders" class="dash-btn dash-btn-secondary dash-btn-sm">
+                    View All Orders
+                    <i data-lucide="arrow-right"></i>
+                  </a>
+                </div>
+
+                <% if (orders.length === 0) { %>
+                  <div class="empty-state">
+                    <div class="empty-icon">
+                      <i data-lucide="package"></i>
+                    </div>
+                    <h4>No orders yet</h4>
+                    <p>Orders will appear here once customers start purchasing.</p>
+                  </div>
+                <% } else { %>
+                  <div class="table-responsive">
+                    <table class="orders-table">
+                      <thead>
+                        <tr>
+                          <th>Order ID</th>
+                          <th>Customer</th>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% orders.slice(0, 5).forEach(function(order) { %>
+                          <tr>
+                            <td class="order-id"><a href="/dashboard/orders/<%= order.id %>">#<%= order.id %></a></td>
+                            <td>
+                              <div class="customer-cell">
+                                <div class="customer-avatar"><%= order.customer.split(' ').map(n => n[0]).join('') %></div>
+                                <div class="customer-info">
+                                  <span class="customer-name"><%= order.customer %></span>
+                                  <span class="customer-email"><%= order.email %></span>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="order-date"><%= order.date %></td>
+                            <td class="order-amount">$<%= order.amount.toLocaleString() %></td>
+                            <td>
+                              <span class="order-status <%= order.status %>">
+                                <i data-lucide="<%= order.status === 'delivered' ? 'check-circle' : order.status === 'shipped' ? 'truck' : order.status === 'processing' ? 'loader' : 'clock' %>"></i>
+                                <%= order.status.charAt(0).toUpperCase() + order.status.slice(1) %>
+                              </span>
+                            </td>
+                            <td>
+                              <div class="order-actions">
+                                <a href="/dashboard/orders/<%= order.id %>" class="order-action-btn" title="View Order">
+                                  <i data-lucide="eye"></i>
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                        <% }); %>
+                      </tbody>
+                    </table>
+                  </div>
+                <% } %>
+              </div>
+
+              <!-- Two Column Grid: Activity Feed + Top Products -->
+              <div class="charts-grid">
+                <!-- Activity Feed -->
+                <div class="activity-feed">
+                  <div class="chart-card-header">
+                    <div class="chart-header-left">
+                      <h3 class="chart-card-title">
+                        <i data-lucide="activity"></i>
+                        Recent Activity
+                      </h3>
+                      <p class="chart-subtitle">Latest events on your store</p>
+                    </div>
+                  </div>
+                  <div class="activity-list">
+                    <% if (activities && activities.length > 0) { %>
+                      <% activities.forEach(function(activity, index) { %>
+                        <div class="activity-item">
+                          <div class="activity-timeline">
+                            <div class="activity-icon <%= activity.type %>">
+                              <i data-lucide="<%= activity.icon || (activity.type === 'order' ? 'shopping-cart' : activity.type === 'visitor' ? 'user' : 'dollar-sign') %>"></i>
+                            </div>
+                            <% if (index < activities.length - 1) { %>
+                              <div class="activity-line"></div>
+                            <% } %>
+                          </div>
+                          <div class="activity-content">
+                            <div class="activity-text"><%- activity.message %></div>
+                            <div class="activity-time">
+                              <i data-lucide="clock"></i>
+                              <%= activity.time %>
+                              <% if (activity.amount) { %>
+                                <span class="activity-amount"><%= activity.amount %></span>
+                              <% } %>
+                            </div>
+                          </div>
+                        </div>
+                      <% }); %>
+                    <% } else { %>
+                      <div class="activity-empty">
+                        <i data-lucide="inbox"></i>
+                        <span>No recent activity</span>
+                      </div>
+                    <% } %>
+                  </div>
+                </div>
+
+                <!-- Top Products -->
+                <div class="chart-card">
+                  <div class="chart-card-header">
+                    <div class="chart-header-left">
+                      <h3 class="chart-card-title">
+                        <i data-lucide="trending-up"></i>
+                        Top Products
+                      </h3>
+                      <p class="chart-subtitle">Best selling items this month</p>
+                    </div>
+                  </div>
+                  <div class="chart-card-body">
+                    <div class="chart-container">
+                      <canvas id="topProductsChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Integrations Status -->
+              <div class="integrations-card">
+                <div class="card-section-header">
+                  <h3><i data-lucide="puzzle"></i> Integrations</h3>
+                  <a href="/dashboard/integrations" class="dash-btn dash-btn-secondary dash-btn-sm">
+                    <i data-lucide="settings"></i>
+                    Manage
+                  </a>
+                </div>
+                <div class="integrations-grid">
+                  <div class="integration-item <%= website.integrations.googleAnalytics ? 'connected' : '' %>">
+                    <div class="integration-icon ga">
+                      <i data-lucide="bar-chart-2"></i>
+                    </div>
+                    <div class="integration-info">
+                      <span class="integration-name">Google Analytics</span>
+                      <span class="integration-status"><%= website.integrations.googleAnalytics ? 'Connected' : 'Not Connected' %></span>
+                    </div>
+                    <span class="integration-badge <%= website.integrations.googleAnalytics ? 'active' : 'inactive' %>">
+                      <i data-lucide="<%= website.integrations.googleAnalytics ? 'check' : 'x' %>"></i>
+                    </span>
+                  </div>
+                  
+                  <div class="integration-item <%= website.integrations.stripe ? 'connected' : '' %>">
+                    <div class="integration-icon stripe">
+                      <i data-lucide="credit-card"></i>
+                    </div>
+                    <div class="integration-info">
+                      <span class="integration-name">Stripe</span>
+                      <span class="integration-status"><%= website.integrations.stripe ? 'Connected' : 'Not Connected' %></span>
+                    </div>
+                    <span class="integration-badge <%= website.integrations.stripe ? 'active' : 'inactive' %>">
+                      <i data-lucide="<%= website.integrations.stripe ? 'check' : 'x' %>"></i>
+                    </span>
+                  </div>
+                  
+                  <div class="integration-item <%= website.integrations.paypal ? 'connected' : '' %>">
+                    <div class="integration-icon paypal">
+                      <i data-lucide="wallet"></i>
+                    </div>
+                    <div class="integration-info">
+                      <span class="integration-name">PayPal</span>
+                      <span class="integration-status"><%= website.integrations.paypal ? 'Connected' : 'Not Connected' %></span>
+                    </div>
+                    <span class="integration-badge <%= website.integrations.paypal ? 'active' : 'inactive' %>">
+                      <i data-lucide="<%= website.integrations.paypal ? 'check' : 'x' %>"></i>
+                    </span>
+                  </div>
+                  
+                  <div class="integration-item <%= website.integrations.facebookPixel ? 'connected' : '' %>">
+                    <div class="integration-icon fb">
+                      <i data-lucide="target"></i>
+                    </div>
+                    <div class="integration-info">
+                      <span class="integration-name">Facebook Pixel</span>
+                      <span class="integration-status"><%= website.integrations.facebookPixel ? 'Connected' : 'Not Connected' %></span>
+                    </div>
+                    <span class="integration-badge <%= website.integrations.facebookPixel ? 'active' : 'inactive' %>">
+                      <i data-lucide="<%= website.integrations.facebookPixel ? 'check' : 'x' %>"></i>
+                    </span>
+                  </div>
+                  
+                  <div class="integration-item <%= website.integrations.mailchimp ? 'connected' : '' %>">
+                    <div class="integration-icon mailchimp">
+                      <i data-lucide="mail"></i>
+                    </div>
+                    <div class="integration-info">
+                      <span class="integration-name">Mailchimp</span>
+                      <span class="integration-status"><%= website.integrations.mailchimp ? 'Connected' : 'Not Connected' %></span>
+                    </div>
+                    <span class="integration-badge <%= website.integrations.mailchimp ? 'active' : 'inactive' %>">
+                      <i data-lucide="<%= website.integrations.mailchimp ? 'check' : 'x' %>"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chart.js Library -->
+              <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+              
+              <script>
+                // Wait for everything to load
+                document.addEventListener('DOMContentLoaded', function() {
+                  // Initialize Lucide icons
+                  if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                  }
+                  
+                  // Wait a bit for Chart.js to load
+                  setTimeout(initializeCharts, 100);
+                });
+
+                function initializeCharts() {
+                  // Check if Chart.js is available
+                  if (typeof Chart === 'undefined') {
+                    console.error('Chart.js not loaded, retrying...');
+                    setTimeout(initializeCharts, 200);
+                    return;
+                  }
+
+                  // Chart.js global defaults
+                  Chart.defaults.responsive = true;
+                  Chart.defaults.maintainAspectRatio = false;
+                  Chart.defaults.animation.duration = 800;
+                  Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+
+                  // Mock Chart Data - Hardcoded for reliability
+                  const chartData = {
+                    revenue: [1450, 1680, 1520, 2100, 2350, 2180, 2580],
+                    revenue30d: [8200, 9450, 10200, 11800],
+                    revenue90d: [28500, 32400, 38200],
+                    orderStatus: [2, 2, 2, 4],
+                    visitors: {
+                      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                      data: [1820, 2150, 1960, 2480, 2890, 3200, 2950]
+                    },
+                    devices: {
+                      labels: ['Desktop', 'Mobile', 'Tablet'],
+                      data: [52, 38, 10],
+                      colors: ['#6366F1', '#10B981', '#F59E0B']
+                    },
+                    trafficSources: {
+                      labels: ['Direct', 'Organic Search', 'Social Media', 'Referrals', 'Email'],
+                      data: [35, 28, 18, 12, 7],
+                      colors: ['#6366F1', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899']
+                    },
+                    topProducts: {
+                      labels: ['Brake Pads Pro', 'Premium Oil Filters', 'Spark Plugs Set', 'Air Filters HD', 'Car Batteries'],
+                      data: [145, 128, 96, 84, 72]
+                    }
+                  };
+
+                  // 1. REVENUE LINE CHART
+                  const revenueCanvas = document.getElementById('revenueChart');
+                  if (revenueCanvas) {
+                    const revenueCtx = revenueCanvas.getContext('2d');
+                    const revenueGradient = revenueCtx.createLinearGradient(0, 0, 0, 250);
+                    revenueGradient.addColorStop(0, 'rgba(99, 102, 241, 0.3)');
+                    revenueGradient.addColorStop(1, 'rgba(99, 102, 241, 0.02)');
+
+                    window.revenueChart = new Chart(revenueCtx, {
+                      type: 'line',
+                      data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                          label: 'Revenue',
+                          data: chartData.revenue,
+                          borderColor: '#6366F1',
+                          backgroundColor: revenueGradient,
+                          tension: 0.4,
+                          fill: true,
+                          pointBackgroundColor: '#6366F1',
+                          pointBorderColor: '#fff',
+                          pointBorderWidth: 2,
+                          pointRadius: 4,
+                          pointHoverRadius: 6,
+                          borderWidth: 2
+                        }]
+                      },
+                      options: {
+                        plugins: {
+                          legend: { display: false },
+                          tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                              label: function(ctx) { return '$' + ctx.parsed.y.toLocaleString(); }
+                            }
+                          }
+                        },
+                        scales: {
+                          y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: {
+                              callback: function(v) { return '$' + v.toLocaleString(); },
+                              font: { size: 11 },
+                              color: '#64748B'
+                            }
+                          },
+                          x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 11 }, color: '#64748B' }
+                          }
+                        }
+                      }
+                    });
+                    console.log('Revenue chart created');
+                  }
+
+                  // 2. ORDERS STATUS DOUGHNUT CHART
+                  const ordersCanvas = document.getElementById('ordersStatusChart');
+                  if (ordersCanvas) {
+                    new Chart(ordersCanvas.getContext('2d'), {
+                      type: 'doughnut',
+                      data: {
+                        labels: ['Pending', 'Processing', 'Shipped', 'Delivered'],
+                        datasets: [{
+                          data: chartData.orderStatus,
+                          backgroundColor: ['#F59E0B', '#06B6D4', '#6366F1', '#10B981'],
+                          borderWidth: 0,
+                          hoverOffset: 8
+                        }]
+                      },
+                      options: {
+                        plugins: {
+                          legend: {
+                            position: 'bottom',
+                            labels: { padding: 15, usePointStyle: true, font: { size: 11 } }
+                          }
+                        },
+                        cutout: '65%'
+                      }
+                    });
+                    console.log('Orders chart created');
+                  }
+
+                  // 3. VISITORS LINE CHART
+                  const visitorsCanvas = document.getElementById('visitorsChart');
+                  if (visitorsCanvas) {
+                    const visitorsCtx = visitorsCanvas.getContext('2d');
+                    const visitorsGradient = visitorsCtx.createLinearGradient(0, 0, 0, 250);
+                    visitorsGradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+                    visitorsGradient.addColorStop(1, 'rgba(16, 185, 129, 0.02)');
+
+                    new Chart(visitorsCtx, {
+                      type: 'line',
+                      data: {
+                        labels: chartData.visitors.labels,
+                        datasets: [{
+                          label: 'Visitors',
+                          data: chartData.visitors.data,
+                          borderColor: '#10B981',
+                          backgroundColor: visitorsGradient,
+                          tension: 0.4,
+                          fill: true,
+                          pointBackgroundColor: '#10B981',
+                          pointBorderColor: '#fff',
+                          pointBorderWidth: 2,
+                          pointRadius: 4,
+                          borderWidth: 2
+                        }]
+                      },
+                      options: {
+                        plugins: {
+                          legend: { display: false },
+                          tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                              label: function(ctx) { return ctx.parsed.y.toLocaleString() + ' visitors'; }
+                            }
+                          }
+                        },
+                        scales: {
+                          y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: { font: { size: 11 }, color: '#64748B' }
+                          },
+                          x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 11 }, color: '#64748B' }
+                          }
+                        }
+                      }
+                    });
+                    console.log('Visitors chart created');
+                  }
+
+                  // 4. DEVICES DOUGHNUT CHART
+                  const devicesCanvas = document.getElementById('devicesChart');
+                  if (devicesCanvas) {
+                    new Chart(devicesCanvas.getContext('2d'), {
+                      type: 'doughnut',
+                      data: {
+                        labels: chartData.devices.labels,
+                        datasets: [{
+                          data: chartData.devices.data,
+                          backgroundColor: chartData.devices.colors,
+                          borderWidth: 0,
+                          hoverOffset: 6
+                        }]
+                      },
+                      options: {
+                        plugins: {
+                          legend: {
+                            position: 'bottom',
+                            labels: { padding: 15, usePointStyle: true, font: { size: 11 } }
+                          },
+                          tooltip: {
+                            callbacks: {
+                              label: function(ctx) { return ctx.label + ': ' + ctx.parsed + '%'; }
+                            }
+                          }
+                        },
+                        cutout: '55%'
+                      }
+                    });
+                    console.log('Devices chart created');
+                  }
+
+                  // 5. TRAFFIC SOURCES BAR CHART
+                  const trafficCanvas = document.getElementById('trafficSourcesChart');
+                  if (trafficCanvas) {
+                    new Chart(trafficCanvas.getContext('2d'), {
+                      type: 'bar',
+                      data: {
+                        labels: chartData.trafficSources.labels,
+                        datasets: [{
+                          data: chartData.trafficSources.data,
+                          backgroundColor: chartData.trafficSources.colors,
+                          borderRadius: 6,
+                          barThickness: 28
+                        }]
+                      },
+                      options: {
+                        indexAxis: 'y',
+                        plugins: {
+                          legend: { display: false },
+                          tooltip: {
+                            callbacks: {
+                              label: function(ctx) { return ctx.parsed.x + '% of traffic'; }
+                            }
+                          }
+                        },
+                        scales: {
+                          x: {
+                            beginAtZero: true,
+                            max: 50,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: {
+                              callback: function(v) { return v + '%'; },
+                              font: { size: 11 },
+                              color: '#64748B'
+                            }
+                          },
+                          y: {
+                            grid: { display: false },
+                            ticks: { font: { size: 11, weight: 500 }, color: '#1E293B' }
+                          }
+                        }
+                      }
+                    });
+                    console.log('Traffic chart created');
+                  }
+
+                  // 6. TOP PRODUCTS BAR CHART
+                  const productsCanvas = document.getElementById('topProductsChart');
+                  if (productsCanvas) {
+                    new Chart(productsCanvas.getContext('2d'), {
+                      type: 'bar',
+                      data: {
+                        labels: chartData.topProducts.labels,
+                        datasets: [{
+                          data: chartData.topProducts.data,
+                          backgroundColor: [
+                            '#6366F1',
+                            '#8B5CF6',
+                            '#A78BFA',
+                            '#C4B5FD',
+                            '#DDD6FE'
+                          ],
+                          borderRadius: 6,
+                          barThickness: 20
+                        }]
+                      },
+                      options: {
+                        indexAxis: 'y',
+                        plugins: {
+                          legend: { display: false },
+                          tooltip: {
+                            callbacks: {
+                              label: function(ctx) { return ctx.parsed.x + ' units sold'; }
+                            }
+                          }
+                        },
+                        scales: {
+                          x: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: { font: { size: 11 }, color: '#64748B' }
+                          },
+                          y: {
+                            grid: { display: false },
+                            ticks: { font: { size: 10, weight: 500 }, color: '#1E293B' }
+                          }
+                        }
+                      }
+                    });
+                    console.log('Products chart created');
+                  }
+
+                  // Revenue range filter buttons
+                  const revenueDataSets = {
+                    '7d': { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], data: chartData.revenue },
+                    '30d': { labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], data: chartData.revenue30d },
+                    '90d': { labels: ['Month 1', 'Month 2', 'Month 3'], data: chartData.revenue90d }
+                  };
+
+                  document.querySelectorAll('[data-chart="revenue"]').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                      const range = this.dataset.range;
+                      document.querySelectorAll('[data-chart="revenue"]').forEach(function(b) {
+                        b.classList.remove('active');
+                      });
+                      this.classList.add('active');
+                      
+                      if (window.revenueChart) {
+                        window.revenueChart.data.labels = revenueDataSets[range].labels;
+                        window.revenueChart.data.datasets[0].data = revenueDataSets[range].data;
+                        window.revenueChart.update();
+                      }
+                    });
+                  });
+
+                  // Real-time visitor simulation
+                  setInterval(function() {
+                    const countEl = document.querySelector('.realtime-count');
+                    if (countEl) {
+                      const current = parseInt(countEl.textContent) || 47;
+                      const change = Math.floor(Math.random() * 5) - 2;
+                      countEl.textContent = Math.max(30, current + change);
+                    }
+                  }, 3000);
+
+                  console.log('All dashboard charts initialized successfully!');
+                }
+              </script>
+
+              <%- include('partials/footer') %>

@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Themes - PartKon</title>
+  <link rel="stylesheet" href="/css/customer/main.css">
+  <link rel="stylesheet" href="/css/customer/themes.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="dash-wrapper">
+    <%- include('partials/sidebar', { activePage: 'themes' }) %>
+    
+    <main class="dash-main">
+      <%- include('partials/topbar') %>
+      
+      <div class="dash-content">
+        <!-- Theme Selection View -->
+        <div id="themeSelectionView">
+          <!-- Page Header -->
+          <div class="page-header">
+            <div class="page-header-content">
+              <div class="page-header-icon">
+                <i data-lucide="palette"></i>
+              </div>
+              <div class="page-header-text">
+                <h1>Choose Your Theme</h1>
+                <p>Select from 15 professionally designed themes. Each theme includes complete pages, sections, and components ready to customize.</p>
+              </div>
+            </div>
+            <div class="page-header-actions">
+              <div class="theme-search">
+                <i data-lucide="search"></i>
+                <input type="text" id="themeSearch" placeholder="Search themes...">
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="category-filter">
+            <button class="category-btn active" data-category="all">
+              <i data-lucide="grid-3x3"></i>
+              All Themes
+            </button>
+            <button class="category-btn" data-category="automotive">
+              <i data-lucide="car"></i>
+              Automotive
+            </button>
+            <button class="category-btn" data-category="ecommerce">
+              <i data-lucide="shopping-bag"></i>
+              E-Commerce
+            </button>
+            <button class="category-btn" data-category="saas">
+              <i data-lucide="cloud"></i>
+              SaaS
+            </button>
+            <button class="category-btn" data-category="corporate">
+              <i data-lucide="building-2"></i>
+              Corporate
+            </button>
+            <button class="category-btn" data-category="portfolio">
+              <i data-lucide="briefcase"></i>
+              Portfolio
+            </button>
+          </div>
+
+          <!-- Themes Grid -->
+          <div class="themes-grid" id="themesGrid">
+            <!-- Theme Card 1 - Auto Parts Pro -->
+            <div class="theme-card" data-theme="auto-parts-pro" data-category="automotive">
+              <div class="theme-preview">
+                <img src="/images/6ecb825d-f48a-47aa-85e6-a2eb1535f7f5.avif" alt="Auto Parts Pro Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+                <div class="theme-badge popular">Popular</div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Auto Parts Pro</h3>
+                <p class="theme-description">Professional automotive parts marketplace with advanced search and filtering.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 7 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 24 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Smart Search</span>
+                  <span class="feature-tag">Product Grid</span>
+                  <span class="feature-tag">Cart</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 2 - Parts Finder -->
+            <div class="theme-card" data-theme="parts-finder" data-category="automotive">
+              <div class="theme-preview">
+                <img src="/images/template-social-media-with-coffee_23-2148469144.avif" alt="Parts Finder Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+                <div class="theme-badge new">New</div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Parts Finder</h3>
+                <p class="theme-description">Clean and modern parts catalog with VIN lookup and compatibility checker.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 8 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 28 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">VIN Lookup</span>
+                  <span class="feature-tag">Comparison</span>
+                  <span class="feature-tag">Wishlist</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 3 - Auto Garage -->
+            <div class="theme-card" data-theme="auto-garage" data-category="automotive">
+              <div class="theme-preview">
+                <img src="/images/6ecb825d-f48a-47aa-85e6-a2eb1535f7f5.avif" alt="Auto Garage Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Auto Garage</h3>
+                <p class="theme-description">Bold and dynamic theme for auto repair shops and service centers.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 6 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 20 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Booking</span>
+                  <span class="feature-tag">Services</span>
+                  <span class="feature-tag">Gallery</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 4 - Shop Elite -->
+            <div class="theme-card" data-theme="shop-elite" data-category="ecommerce">
+              <div class="theme-preview">
+                <img src="/images/template-social-media-with-coffee_23-2148469144.avif" alt="Shop Elite Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+                <div class="theme-badge popular">Popular</div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Shop Elite</h3>
+                <p class="theme-description">Premium e-commerce theme with stunning product displays and smooth checkout.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 10 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 32 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Mega Menu</span>
+                  <span class="feature-tag">Quick View</span>
+                  <span class="feature-tag">Reviews</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 5 - Market Pro -->
+            <div class="theme-card" data-theme="market-pro" data-category="ecommerce">
+              <div class="theme-preview">
+                <img src="/images/6ecb825d-f48a-47aa-85e6-a2eb1535f7f5.avif" alt="Market Pro Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Market Pro</h3>
+                <p class="theme-description">Multi-vendor marketplace theme with seller dashboards and product filters.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 12 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 36 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Multi-Vendor</span>
+                  <span class="feature-tag">Filters</span>
+                  <span class="feature-tag">Dashboard</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 6 - Boutique -->
+            <div class="theme-card" data-theme="boutique" data-category="ecommerce">
+              <div class="theme-preview">
+                <img src="/images/template-social-media-with-coffee_23-2148469144.avif" alt="Boutique Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Boutique</h3>
+                <p class="theme-description">Elegant fashion and lifestyle theme with lookbook galleries and collections.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 8 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 26 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Lookbook</span>
+                  <span class="feature-tag">Collections</span>
+                  <span class="feature-tag">Instagram</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 7 - SaaS Launch -->
+            <div class="theme-card" data-theme="saas-launch" data-category="saas">
+              <div class="theme-preview">
+                <img src="/images/6ecb825d-f48a-47aa-85e6-a2eb1535f7f5.avif" alt="SaaS Launch Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+                <div class="theme-badge popular">Popular</div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">SaaS Launch</h3>
+                <p class="theme-description">Modern SaaS landing page with feature showcases and pricing tables.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 6 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 22 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Pricing</span>
+                  <span class="feature-tag">Features</span>
+                  <span class="feature-tag">Testimonials</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 8 - App Studio -->
+            <div class="theme-card" data-theme="app-studio" data-category="saas">
+              <div class="theme-preview">
+                <img src="/images/template-social-media-with-coffee_23-2148469144.avif" alt="App Studio Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+                <div class="theme-badge new">New</div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">App Studio</h3>
+                <p class="theme-description">Creative app showcase with animated demos and download sections.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 5 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 18 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">App Demo</span>
+                  <span class="feature-tag">Downloads</span>
+                  <span class="feature-tag">Screenshots</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 9 - Dashboard Pro -->
+            <div class="theme-card" data-theme="dashboard-pro" data-category="saas">
+              <div class="theme-preview">
+                <img src="/images/6ecb825d-f48a-47aa-85e6-a2eb1535f7f5.avif" alt="Dashboard Pro Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Dashboard Pro</h3>
+                <p class="theme-description">Analytics dashboard theme with charts, reports, and data visualization.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 8 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 30 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Charts</span>
+                  <span class="feature-tag">Reports</span>
+                  <span class="feature-tag">Analytics</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 10 - Corporate Edge -->
+            <div class="theme-card" data-theme="corporate-edge" data-category="corporate">
+              <div class="theme-preview">
+                <img src="/images/template-social-media-with-coffee_23-2148469144.avif" alt="Corporate Edge Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Corporate Edge</h3>
+                <p class="theme-description">Professional corporate theme with team profiles and service showcases.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 9 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 28 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Team</span>
+                  <span class="feature-tag">Services</span>
+                  <span class="feature-tag">Case Studies</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 11 - Business Hub -->
+            <div class="theme-card" data-theme="business-hub" data-category="corporate">
+              <div class="theme-preview">
+                <img src="/images/6ecb825d-f48a-47aa-85e6-a2eb1535f7f5.avif" alt="Business Hub Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Business Hub</h3>
+                <p class="theme-description">Versatile business theme with client testimonials and portfolio sections.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 7 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 24 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Portfolio</span>
+                  <span class="feature-tag">Clients</span>
+                  <span class="feature-tag">Blog</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 12 - Consulting Pro -->
+            <div class="theme-card" data-theme="consulting-pro" data-category="corporate">
+              <div class="theme-preview">
+                <img src="/images/template-social-media-with-coffee_23-2148469144.avif" alt="Consulting Pro Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+                <div class="theme-badge new">New</div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Consulting Pro</h3>
+                <p class="theme-description">Consulting firm theme with expertise areas and appointment booking.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 8 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 26 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Booking</span>
+                  <span class="feature-tag">Expertise</span>
+                  <span class="feature-tag">FAQ</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 13 - Creative Folio -->
+            <div class="theme-card" data-theme="creative-folio" data-category="portfolio">
+              <div class="theme-preview">
+                <img src="/images/6ecb825d-f48a-47aa-85e6-a2eb1535f7f5.avif" alt="Creative Folio Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+                <div class="theme-badge popular">Popular</div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Creative Folio</h3>
+                <p class="theme-description">Stunning portfolio theme with project galleries and case study layouts.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 6 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 20 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Gallery</span>
+                  <span class="feature-tag">Case Studies</span>
+                  <span class="feature-tag">Resume</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 14 - Studio X -->
+            <div class="theme-card" data-theme="studio-x" data-category="portfolio">
+              <div class="theme-preview">
+                <img src="/images/template-social-media-with-coffee_23-2148469144.avif" alt="Studio X Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Studio X</h3>
+                <p class="theme-description">Minimal design studio theme with work showcases and client list.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 5 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 16 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Works</span>
+                  <span class="feature-tag">Clients</span>
+                  <span class="feature-tag">Contact</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Theme Card 15 - Photo Pro -->
+            <div class="theme-card" data-theme="photo-pro" data-category="portfolio">
+              <div class="theme-preview">
+                <img src="/images/6ecb825d-f48a-47aa-85e6-a2eb1535f7f5.avif" alt="Photo Pro Theme">
+                <div class="theme-preview-overlay">
+                  <button class="preview-btn" data-action="preview">
+                    <i data-lucide="eye"></i>
+                    Preview
+                  </button>
+                  <button class="preview-btn primary" data-action="select">
+                    <i data-lucide="check"></i>
+                    Select Theme
+                  </button>
+                </div>
+              </div>
+              <div class="theme-info">
+                <h3 class="theme-name">Photo Pro</h3>
+                <p class="theme-description">Photography portfolio with fullscreen galleries and booking system.</p>
+                <div class="theme-meta">
+                  <span class="theme-pages"><i data-lucide="file-text"></i> 7 Pages</span>
+                  <span class="theme-sections"><i data-lucide="layers"></i> 22 Sections</span>
+                </div>
+                <div class="theme-features">
+                  <span class="feature-tag">Galleries</span>
+                  <span class="feature-tag">Booking</span>
+                  <span class="feature-tag">Packages</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Theme Customization Wizard (Hidden by default) -->
+        <div id="themeWizardView" class="hidden">
+          <!-- Wizard Header -->
+          <div class="wizard-header">
+            <button class="wizard-back-btn" id="wizardBackBtn">
+              <i data-lucide="arrow-left"></i>
+              Back to Themes
+            </button>
+            <div class="wizard-theme-info">
+              <div class="wizard-theme-preview">
+                <img src="" alt="Selected Theme" id="wizardThemeImage">
+              </div>
+              <div class="wizard-theme-details">
+                <h2 id="wizardThemeName">Theme Name</h2>
+                <p id="wizardThemeDesc">Theme description</p>
+              </div>
+            </div>
+            <div class="wizard-actions">
+              <button class="wizard-btn secondary" id="previewWebsiteBtn">
+                <i data-lucide="external-link"></i>
+                Preview
+              </button>
+              <button class="wizard-btn primary" id="publishWebsiteBtn">
+                <i data-lucide="rocket"></i>
+                Publish Website
+              </button>
+            </div>
+          </div>
+
+          <!-- Wizard Tabs -->
+          <div class="wizard-tabs">
+            <button class="wizard-tab active" data-tab="branding">
+              <div class="tab-number">1</div>
+              <div class="tab-content">
+                <span class="tab-title">Branding</span>
+                <span class="tab-desc">Logo & Brand Name</span>
+              </div>
+              <i data-lucide="check-circle" class="tab-check"></i>
+            </button>
+            <div class="tab-connector"></div>
+            <button class="wizard-tab" data-tab="colors">
+              <div class="tab-number">2</div>
+              <div class="tab-content">
+                <span class="tab-title">Colors</span>
+                <span class="tab-desc">Color Scheme</span>
+              </div>
+              <i data-lucide="check-circle" class="tab-check"></i>
+            </button>
+            <div class="tab-connector"></div>
+            <button class="wizard-tab" data-tab="content">
+              <div class="tab-number">3</div>
+              <div class="tab-content">
+                <span class="tab-title">Content</span>
+                <span class="tab-desc">Text & Images</span>
+              </div>
+              <i data-lucide="check-circle" class="tab-check"></i>
+            </button>
+            <div class="tab-connector"></div>
+            <button class="wizard-tab" data-tab="sections">
+              <div class="tab-number">4</div>
+              <div class="tab-content">
+                <span class="tab-title">Sections</span>
+                <span class="tab-desc">Order & Visibility</span>
+              </div>
+              <i data-lucide="check-circle" class="tab-check"></i>
+            </button>
+            <div class="tab-connector"></div>
+            <button class="wizard-tab" data-tab="pages">
+              <div class="tab-number">5</div>
+              <div class="tab-content">
+                <span class="tab-title">Pages</span>
+                <span class="tab-desc">Navigation</span>
+              </div>
+              <i data-lucide="check-circle" class="tab-check"></i>
+            </button>
+          </div>
+
+          <!-- Wizard Panels -->
+          <div class="wizard-content">
+            <!-- Branding Panel -->
+            <div class="wizard-panel active" id="brandingPanel">
+              <div class="panel-layout">
+                <div class="panel-sidebar">
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="image"></i>
+                      Logo Upload
+                    </h3>
+                    <div class="logo-upload-area" id="logoUploadArea">
+                      <div class="logo-preview" id="logoPreview">
+                        <i data-lucide="image-plus"></i>
+                        <span>Click to upload logo</span>
+                      </div>
+                      <input type="file" id="logoInput" accept="image/*" hidden>
+                      <p class="upload-hint">PNG, JPG, or SVG. Max 2MB.</p>
+                    </div>
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="type"></i>
+                      Brand Name
+                    </h3>
+                    <input type="text" class="panel-input" id="brandName" placeholder="Enter your brand name" value="">
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="align-left"></i>
+                      Tagline
+                    </h3>
+                    <input type="text" class="panel-input" id="brandTagline" placeholder="Your company tagline">
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="at-sign"></i>
+                      Contact Email
+                    </h3>
+                    <input type="email" class="panel-input" id="contactEmail" placeholder="contact@yourcompany.com">
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="phone"></i>
+                      Phone Number
+                    </h3>
+                    <input type="tel" class="panel-input" id="contactPhone" placeholder="+1 (555) 123-4567">
+                  </div>
+                </div>
+                <div class="panel-preview">
+                  <div class="preview-container">
+                    <div class="preview-header">
+                      <span class="preview-label">Live Preview</span>
+                      <div class="preview-device-toggle">
+                        <button class="device-btn active" data-device="desktop"><i data-lucide="monitor"></i></button>
+                        <button class="device-btn" data-device="tablet"><i data-lucide="tablet"></i></button>
+                        <button class="device-btn" data-device="mobile"><i data-lucide="smartphone"></i></button>
+                      </div>
+                    </div>
+                    <div class="preview-frame-wrapper" id="previewFrameWrapper">
+                      <iframe id="livePreviewFrame" src="about:blank"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Colors Panel -->
+            <div class="wizard-panel" id="colorsPanel">
+              <div class="panel-layout">
+                <div class="panel-sidebar">
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="palette"></i>
+                      Color Presets
+                    </h3>
+                    <div class="color-presets">
+                      <button class="color-preset active" data-preset="default" style="background: linear-gradient(135deg, #6366F1, #3B82F6);">
+                        <span>Default</span>
+                      </button>
+                      <button class="color-preset" data-preset="ocean" style="background: linear-gradient(135deg, #0EA5E9, #06B6D4);">
+                        <span>Ocean</span>
+                      </button>
+                      <button class="color-preset" data-preset="forest" style="background: linear-gradient(135deg, #10B981, #059669);">
+                        <span>Forest</span>
+                      </button>
+                      <button class="color-preset" data-preset="sunset" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">
+                        <span>Sunset</span>
+                      </button>
+                      <button class="color-preset" data-preset="royal" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);">
+                        <span>Royal</span>
+                      </button>
+                      <button class="color-preset" data-preset="rose" style="background: linear-gradient(135deg, #EC4899, #DB2777);">
+                        <span>Rose</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="droplet"></i>
+                      Primary Color
+                    </h3>
+                    <div class="color-input-group">
+                      <input type="color" class="color-picker" id="primaryColor" value="#6366F1">
+                      <input type="text" class="color-text" id="primaryColorText" value="#6366F1">
+                    </div>
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="droplet"></i>
+                      Secondary Color
+                    </h3>
+                    <div class="color-input-group">
+                      <input type="color" class="color-picker" id="secondaryColor" value="#3B82F6">
+                      <input type="text" class="color-text" id="secondaryColorText" value="#3B82F6">
+                    </div>
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="droplet"></i>
+                      Accent Color
+                    </h3>
+                    <div class="color-input-group">
+                      <input type="color" class="color-picker" id="accentColor" value="#F59E0B">
+                      <input type="text" class="color-text" id="accentColorText" value="#F59E0B">
+                    </div>
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="moon"></i>
+                      Dark Mode
+                    </h3>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="darkModeToggle">
+                      <span class="toggle-slider"></span>
+                      <span class="toggle-label">Enable dark mode option</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="panel-preview">
+                  <div class="preview-container">
+                    <div class="preview-header">
+                      <span class="preview-label">Live Preview</span>
+                      <div class="preview-device-toggle">
+                        <button class="device-btn active" data-device="desktop"><i data-lucide="monitor"></i></button>
+                        <button class="device-btn" data-device="tablet"><i data-lucide="tablet"></i></button>
+                        <button class="device-btn" data-device="mobile"><i data-lucide="smartphone"></i></button>
+                      </div>
+                    </div>
+                    <div class="preview-frame-wrapper">
+                      <iframe id="livePreviewFrame2" src="about:blank"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Panel -->
+            <div class="wizard-panel" id="contentPanel">
+              <div class="panel-layout">
+                <div class="panel-sidebar">
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="file-text"></i>
+                      Select Page
+                    </h3>
+                    <select class="panel-select" id="pageSelector">
+                      <option value="home">Home Page</option>
+                      <option value="about">About Us</option>
+                      <option value="services">Services</option>
+                      <option value="products">Products</option>
+                      <option value="contact">Contact</option>
+                    </select>
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="heading"></i>
+                      Hero Section
+                    </h3>
+                    <div class="content-field">
+                      <label>Headline</label>
+                      <input type="text" class="panel-input" id="heroHeadline" value="Find Quality Auto Parts">
+                    </div>
+                    <div class="content-field">
+                      <label>Subheadline</label>
+                      <textarea class="panel-textarea" id="heroSubheadline" rows="2">Discover premium OEM and aftermarket parts from trusted suppliers worldwide.</textarea>
+                    </div>
+                    <div class="content-field">
+                      <label>Button Text</label>
+                      <input type="text" class="panel-input" id="heroButtonText" value="Start Searching">
+                    </div>
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="image"></i>
+                      Hero Image
+                    </h3>
+                    <div class="image-upload-area" id="heroImageUpload">
+                      <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=200&fit=crop" alt="Hero" id="heroImagePreview">
+                      <div class="image-upload-overlay">
+                        <i data-lucide="upload"></i>
+                        <span>Change Image</span>
+                      </div>
+                      <input type="file" id="heroImageInput" accept="image/*" hidden>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-preview">
+                  <div class="preview-container">
+                    <div class="preview-header">
+                      <span class="preview-label">Live Preview</span>
+                      <div class="preview-device-toggle">
+                        <button class="device-btn active" data-device="desktop"><i data-lucide="monitor"></i></button>
+                        <button class="device-btn" data-device="tablet"><i data-lucide="tablet"></i></button>
+                        <button class="device-btn" data-device="mobile"><i data-lucide="smartphone"></i></button>
+                      </div>
+                    </div>
+                    <div class="preview-frame-wrapper">
+                      <iframe id="livePreviewFrame3" src="about:blank"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sections Panel -->
+            <div class="wizard-panel" id="sectionsPanel">
+              <div class="panel-layout">
+                <div class="panel-sidebar">
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="layers"></i>
+                      Section Order
+                      <span class="hint">Drag to reorder</span>
+                    </h3>
+                    <div class="sections-list" id="sectionsList">
+                      <div class="section-item" data-section="header">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="navigation"></i></div>
+                        <span class="section-name">Header</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked disabled>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="hero">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="image"></i></div>
+                        <span class="section-name">Hero Banner</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="search">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="search"></i></div>
+                        <span class="section-name">Search Box</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="features">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="grid-3x3"></i></div>
+                        <span class="section-name">Features</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="categories">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="layout-grid"></i></div>
+                        <span class="section-name">Categories</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="products">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="package"></i></div>
+                        <span class="section-name">Products</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="stats">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="bar-chart-2"></i></div>
+                        <span class="section-name">Statistics</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="testimonials">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="message-square"></i></div>
+                        <span class="section-name">Testimonials</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="cta">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="megaphone"></i></div>
+                        <span class="section-name">Call to Action</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="section-item" data-section="footer">
+                        <div class="section-drag"><i data-lucide="grip-vertical"></i></div>
+                        <div class="section-icon"><i data-lucide="square"></i></div>
+                        <span class="section-name">Footer</span>
+                        <label class="section-toggle">
+                          <input type="checkbox" checked disabled>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-preview">
+                  <div class="preview-container">
+                    <div class="preview-header">
+                      <span class="preview-label">Live Preview</span>
+                      <div class="preview-device-toggle">
+                        <button class="device-btn active" data-device="desktop"><i data-lucide="monitor"></i></button>
+                        <button class="device-btn" data-device="tablet"><i data-lucide="tablet"></i></button>
+                        <button class="device-btn" data-device="mobile"><i data-lucide="smartphone"></i></button>
+                      </div>
+                    </div>
+                    <div class="preview-frame-wrapper">
+                      <iframe id="livePreviewFrame4" src="about:blank"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pages Panel -->
+            <div class="wizard-panel" id="pagesPanel">
+              <div class="panel-layout">
+                <div class="panel-sidebar">
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="file-text"></i>
+                      Website Pages
+                      <span class="hint">Toggle visibility</span>
+                    </h3>
+                    <div class="pages-list" id="pagesList">
+                      <div class="page-item" data-page="home">
+                        <div class="page-icon"><i data-lucide="home"></i></div>
+                        <div class="page-info">
+                          <span class="page-name">Home</span>
+                          <span class="page-url">/</span>
+                        </div>
+                        <label class="page-toggle">
+                          <input type="checkbox" checked disabled>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="page-item" data-page="search">
+                        <div class="page-icon"><i data-lucide="search"></i></div>
+                        <div class="page-info">
+                          <span class="page-name">Search Results</span>
+                          <span class="page-url">/search</span>
+                        </div>
+                        <label class="page-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="page-item" data-page="product">
+                        <div class="page-icon"><i data-lucide="package"></i></div>
+                        <div class="page-info">
+                          <span class="page-name">Product Details</span>
+                          <span class="page-url">/product/:id</span>
+                        </div>
+                        <label class="page-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="page-item" data-page="cart">
+                        <div class="page-icon"><i data-lucide="shopping-cart"></i></div>
+                        <div class="page-info">
+                          <span class="page-name">Shopping Cart</span>
+                          <span class="page-url">/cart</span>
+                        </div>
+                        <label class="page-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="page-item" data-page="checkout">
+                        <div class="page-icon"><i data-lucide="credit-card"></i></div>
+                        <div class="page-info">
+                          <span class="page-name">Checkout</span>
+                          <span class="page-url">/checkout</span>
+                        </div>
+                        <label class="page-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="page-item" data-page="about">
+                        <div class="page-icon"><i data-lucide="info"></i></div>
+                        <div class="page-info">
+                          <span class="page-name">About Us</span>
+                          <span class="page-url">/about</span>
+                        </div>
+                        <label class="page-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="page-item" data-page="contact">
+                        <div class="page-icon"><i data-lucide="mail"></i></div>
+                        <div class="page-info">
+                          <span class="page-name">Contact</span>
+                          <span class="page-url">/contact</span>
+                        </div>
+                        <label class="page-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                      <div class="page-item" data-page="account">
+                        <div class="page-icon"><i data-lucide="user"></i></div>
+                        <div class="page-info">
+                          <span class="page-name">My Account</span>
+                          <span class="page-url">/account</span>
+                        </div>
+                        <label class="page-toggle">
+                          <input type="checkbox" checked>
+                          <span class="toggle-mini"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel-section">
+                    <h3 class="panel-section-title">
+                      <i data-lucide="navigation"></i>
+                      Navigation Menu
+                    </h3>
+                    <div class="nav-items-list" id="navItemsList">
+                      <div class="nav-item">
+                        <div class="nav-drag"><i data-lucide="grip-vertical"></i></div>
+                        <input type="text" class="nav-input" value="Home">
+                        <button class="nav-delete"><i data-lucide="x"></i></button>
+                      </div>
+                      <div class="nav-item">
+                        <div class="nav-drag"><i data-lucide="grip-vertical"></i></div>
+                        <input type="text" class="nav-input" value="Search">
+                        <button class="nav-delete"><i data-lucide="x"></i></button>
+                      </div>
+                      <div class="nav-item">
+                        <div class="nav-drag"><i data-lucide="grip-vertical"></i></div>
+                        <input type="text" class="nav-input" value="About">
+                        <button class="nav-delete"><i data-lucide="x"></i></button>
+                      </div>
+                      <div class="nav-item">
+                        <div class="nav-drag"><i data-lucide="grip-vertical"></i></div>
+                        <input type="text" class="nav-input" value="Contact">
+                        <button class="nav-delete"><i data-lucide="x"></i></button>
+                      </div>
+                    </div>
+                    <button class="add-nav-btn" id="addNavBtn">
+                      <i data-lucide="plus"></i>
+                      Add Menu Item
+                    </button>
+                  </div>
+                </div>
+                <div class="panel-preview">
+                  <div class="preview-container">
+                    <div class="preview-header">
+                      <span class="preview-label">Live Preview</span>
+                      <div class="preview-device-toggle">
+                        <button class="device-btn active" data-device="desktop"><i data-lucide="monitor"></i></button>
+                        <button class="device-btn" data-device="tablet"><i data-lucide="tablet"></i></button>
+                        <button class="device-btn" data-device="mobile"><i data-lucide="smartphone"></i></button>
+                      </div>
+                    </div>
+                    <div class="preview-frame-wrapper">
+                      <iframe id="livePreviewFrame5" src="about:blank"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wizard Footer -->
+          <div class="wizard-footer">
+            <button class="wizard-nav-btn prev" id="prevStepBtn">
+              <i data-lucide="arrow-left"></i>
+              Previous
+            </button>
+            <div class="wizard-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 20%;"></div>
+              </div>
+              <span class="progress-text">Step <span id="currentStep">1</span> of 5</span>
+            </div>
+            <button class="wizard-nav-btn next" id="nextStepBtn">
+              Next
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Theme Preview Modal -->
+  <div class="preview-modal" id="previewModal">
+    <div class="preview-modal-content">
+      <div class="preview-modal-header">
+        <h3 id="previewModalTitle">Theme Preview</h3>
+        <div class="preview-modal-actions">
+          <div class="modal-device-toggle">
+            <button class="device-btn active" data-device="desktop"><i data-lucide="monitor"></i></button>
+            <button class="device-btn" data-device="tablet"><i data-lucide="tablet"></i></button>
+            <button class="device-btn" data-device="mobile"><i data-lucide="smartphone"></i></button>
+          </div>
+          <button class="modal-close-btn" id="closePreviewModal">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="preview-modal-body">
+        <iframe id="previewModalFrame" src="about:blank"></iframe>
+      </div>
+      <div class="preview-modal-footer">
+        <button class="modal-btn secondary" id="closeModalBtn">Close</button>
+        <button class="modal-btn primary" id="selectFromModalBtn">
+          <i data-lucide="check"></i>
+          Use This Theme
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="/js/themes.js"></script>
+</body>
+</html>

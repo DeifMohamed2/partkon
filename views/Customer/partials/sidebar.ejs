@@ -56,6 +56,15 @@
     <!-- Website Section -->
     <div class="sidebar-nav-section">
       <div class="sidebar-nav-title">Website</div>
+      <a href="/dashboard/themes" class="sidebar-nav-item <%= typeof activePage !== 'undefined' && activePage === 'themes' ? 'active' : '' %>">
+        <i data-lucide="sparkles"></i>
+        <span>Themes</span>
+        <span class="sidebar-nav-badge new">New</span>
+      </a>
+      <a href="/dashboard/website-builder" class="sidebar-nav-item <%= typeof activePage !== 'undefined' && activePage === 'website-builder' ? 'active' : '' %>">
+        <i data-lucide="layout-template"></i>
+        <span>Website Builder</span>
+      </a>
       <a href="/dashboard/appearance" class="sidebar-nav-item <%= typeof activePage !== 'undefined' && activePage === 'appearance' ? 'active' : '' %>">
         <i data-lucide="palette"></i>
         <span>Appearance</span>

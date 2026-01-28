@@ -32,11 +32,11 @@ app.use((req, res, next) => {
 
 // Routes
 const landingRoutes = require('./routes/landing');
-const dashboardRoutes = require('./routes/dashboard');
+const customerRoutes = require('./routes/customer');
 
 // Use routes
 app.use('/', landingRoutes);
-app.use('/', dashboardRoutes);
+app.use('/', customerRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
